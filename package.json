@@ -1,0 +1,17 @@
+{
+  "name": "piknplay-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Sitio de PiknPlay Playground — estático, sin framework, desplegable en Cloudflare Pages",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "dev": "node scripts/dev/serve-static.mjs",
+    "build": "node scripts/build/minify.mjs",
+    "preview": "node scripts/build/bundle-preview.mjs dist/preview.html",
+    "lint": "biome check scripts/",
+    "lint:fix": "biome check --write scripts/"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.9"
+  }
+}

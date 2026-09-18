@@ -1,0 +1,7 @@
+# Rutas internas que Cloudflare desplegaría por estar en el repo pero que no
+# son parte del sitio público.
+/scripts/*   /404.html   404
+/css/src/*   /404.html   404
+
+# URLs limpias: /reglamento sirve reglamento.html
+/:splat.html   /:splat   301

@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>PiknPlay Playground | Juegos para niños en Tampico</title>
+  <meta name="description" content="Playground infantil en Plaza 3 Arcos, Tampico. Acceso por tiempo, áreas separadas por edad y estatura, barra con mesas y espacio para fiestas." />
+  <link rel="canonical" href="https://www.piknplay.mx/" />
+  <link rel="alternate" hreflang="es-MX" href="https://www.piknplay.mx/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="PiknPlay Playground" />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:title" content="PiknPlay Playground | Juegos para niños en Tampico" />
+  <meta property="og:description" content="Playground infantil en Plaza 3 Arcos, Tampico. Acceso por tiempo, áreas separadas por edad y espacio para fiestas." />
+  <meta property="og:url" content="https://www.piknplay.mx/" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="theme-color" content="#e8437f" />
+
+  <link rel="preload" as="image" href="images/logo.png" fetchpriority="high" />
+
+  <!-- PENDIENTE antes de desplegar: autoalojar Baloo 2 y Nunito en /fonts.
+       El contrato de _headers heredado de ARm es font-src 'self', que bloquea
+       fonts.gstatic.com. Mientras el sitio no esté publicado, van por CDN. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+
+  <!-- Hoja base + dos condicionales por media query, igual que armlaboral.com.
+       El ?v= lo reescribe el build a partir del hash del contenido. -->
+  <link rel="preload" href="css/base.css?v=dev" as="style" />
+  <link rel="stylesheet" href="css/base.css?v=dev" />
+  <link rel="stylesheet" href="css/mobile.css?v=dev" media="(max-width: 900px)" />
+  <link rel="stylesheet" href="css/desktop.css?v=dev" media="(min-width: 901px)" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": ["LocalBusiness", "AmusementPark"],
+    "@id": "https://www.piknplay.mx/#negocio",
+    "name": "PiknPlay Playground",
+    "legalName": "Grupo PiknPlay, S.A.S.",
+    "url": "https://www.piknplay.mx/",
+    "image": "https://www.piknplay.mx/images/logo.png",
+    "description": "Centro de entretenimiento infantil en Tampico, Tamaulipas. Acceso por tiempo, áreas de juego separadas por edad y estatura, barra de alimentos y espacio para fiestas infantiles.",
+    "telephone": "+52-833-389-0683",
+    "email": "contacto@piknplay.mx",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Plaza 3 Arcos, Calle Miguel Hidalgo y Costilla, Locales B-2 y B-3, Fraccionamiento Lomas del Naranjal",
+      "addressLocality": "Tampico",
+      "addressRegion": "Tamaulipas",
+      "addressCountry": "MX"
+    },
+    "areaServed": [
+      { "@type": "City", "name": "Tampico" },
+      { "@type": "City", "name": "Ciudad Madero" },
+      { "@type": "City", "name": "Altamira" }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a class="brand" href="#inicio" aria-label="PiknPlay Playground, inicio">
+      <img src="images/logo.png" alt="PiknPlay Playground" width="116" height="43" />
+    </a>
+    <nav class="nav" aria-label="Principal">
+      <a href="#como-funciona">Cómo funciona</a>
+      <a href="#areas">Áreas</a>
+      <a href="#antes">Antes de venir</a>
+      <a class="btn btn-primary" href="https://wa.me/528333890683" rel="noopener">Reservar fiesta</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+
+  <section class="hero">
+      <div class="confeti" aria-hidden="true">
+        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i class="barra"></i><i></i>
+        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i class="barra"></i><i></i>
+        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i class="barra"></i><i></i>
+        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i class="barra"></i><i></i>
+        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i class="barra"></i><i></i>
+        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i>
+      </div>
+    <div class="container">
+      <!-- El logotipo va como texto, no como imagen, para poder animar letra
+           por letra. role="img" + aria-label: el lector de pantalla lee el
+           nombre completo y no "P i k n P l a y". -->
+      <div class="hero-logo-wrap">
+        <div class="wordmark" role="img" aria-label="PiknPlay Playground">
+          <span class="l l-p1"><span class="g">P</span></span><span class="l l-i"><span class="g">ı</span></span><span class="l l-k"><span class="g">k</span></span><span class="l l-n"><span class="g">n</span><i class="rayo r1"></i><i class="rayo r2"></i><i class="rayo r3"></i></span><span class="l l-p2"><span class="g">P</span></span><span class="l l-l"><span class="g">l</span></span><span class="l l-a"><span class="g">a</span></span><span class="l l-y"><span class="g">y</span></span>
+        </div>
+        <div class="wordmark-sub" aria-hidden="true">
+          <span class="punto"></span>PLAYGROUND<span class="punto"></span>
+        </div>
+      </div>
+      <span class="eyebrow"><span class="dot"></span> Plaza 3 Arcos · Tampico, Tamaulipas</span>
+      <h1>Aquí los niños juegan<br /><span class="swash" style="--swash: rgba(242,161,30,.45)">y tú te sientas un rato</span>.</h1>
+      <p class="lead">
+        Áreas separadas por edad y estatura, y una barra con mesas para los adultos.
+        Se paga por tiempo, se entra con calcetines antiderrapantes y se sale con las
+        pilas gastadas.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="https://wa.me/528333890683" rel="noopener">Cotizar una fiesta</a>
+        <a class="btn btn-ghost" href="#como-funciona">Cómo funciona</a>
+      </div>
+      <p class="hero-note">
+        PiknPlay es un espacio de juego <strong>bajo la supervisión del adulto que acompaña</strong>.
+        No somos guardería ni servicio de cuidado de menores: tú te quedas con nosotros.
+      </p>
+
+      <div class="facts">
+        <article class="fact f-ambar">
+          <span class="chip" aria-hidden="true">⏱️</span>
+          <strong>Se paga por tiempo</strong>
+          <span>El reloj corre al registrar la entrada. Hay 10 minutos de tolerancia.</span>
+        </article>
+        <article class="fact f-menta">
+          <span class="chip" aria-hidden="true">🧦</span>
+          <strong>Calcetines antiderrapantes</strong>
+          <span>Para niños y adultos. Se consiguen en recepción.</span>
+        </article>
+        <article class="fact f-cielo">
+          <span class="chip" aria-hidden="true">👶</span>
+          <strong>Zona de bebés</strong>
+          <span>Área exclusiva para menores de 3 años.</span>
+        </article>
+        <article class="fact f-rosa">
+          <span class="chip" aria-hidden="true">🎈</span>
+          <strong>Fiestas privadas</strong>
+          <span>Cotiza fecha y paquete por WhatsApp.</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="como-funciona">
+    <div class="container panel">
+      <div class="section-head">
+        <span class="kicker k-cielo">Primera visita</span>
+        <h2>Tu primera vez, <span class="swash" style="--swash: rgba(90,174,228,.4)">en tres pasos</span></h2>
+        <p>La primera vez tomamos unos datos. De ahí en adelante, con dar el nombre basta.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card c-ambar">
+          <div class="step">1</div>
+          <h3>Registro</h3>
+          <p>Anotamos el nombre y la edad del peque, las alergias que debamos conocer, y tus datos y los de quien más puede recogerlo.</p>
+        </article>
+        <article class="card c-menta">
+          <div class="step">2</div>
+          <h3>Pulsera</h3>
+          <p>Cada niño recibe su pulsera con número de registro. A la salida lo entregamos solo a ti o a la persona que autorizaste, con identificación.</p>
+        </article>
+        <article class="card c-cielo">
+          <div class="step">3</div>
+          <h3>A jugar</h3>
+          <p>Eliges el tiempo de acceso conforme a las tarifas de recepción. Te avisamos cuando esté por terminar; pasada la tolerancia se cobra por bloques de 15 minutos.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="areas">
+    <div class="container panel">
+      <div class="section-head">
+        <span class="kicker k-menta">El espacio</span>
+        <h2>Las áreas están hechas <span class="swash" style="--swash: rgba(79,189,138,.4)">por tamaño</span></h2>
+        <p>Cada zona está señalizada por edad y estatura. No es capricho: es lo que hace que el juego sea seguro para cada quien.</p>
+      </div>
+      <div class="grid-3">
+        <article class="card c-cielo">
+          <h3>Zona de bebés</h3>
+          <p>Exclusiva para menores de 3 años, con juego blando y sin niños grandes pasando encima.</p>
+        </article>
+        <article class="card c-uva">
+          <h3>Estructuras de juego</h3>
+          <p>Cada juego tiene una forma correcta de usarse y una capacidad máxima. Nuestro personal supervisa y acomoda cuando hace falta.</p>
+        </article>
+        <article class="card c-ambar">
+          <h3>Barra y mesas</h3>
+          <p>Aquí se come y se toma café, nunca dentro de las áreas de juego. Si hay alergias, dinos al registrarte y al ordenar.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="antes">
+    <div class="container panel">
+      <div class="grid-2">
+        <div>
+          <span class="kicker k-rosa">Antes de venir</span>
+          <h2>Cuatro cosas <span class="swash" style="--swash: rgba(232,67,127,.34)">que conviene saber</span></h2>
+          <ul class="rules">
+            <li><span class="tick" style="--acc: var(--ambar)" aria-hidden="true">✓</span><div><strong>Un adulto acompaña a cada niño.</strong> <span>Mayor de 18 años, se registra como responsable y permanece dentro durante toda la visita.</span></div></li>
+            <li><span class="tick" style="--acc: var(--menta)" aria-hidden="true">✓</span><div><strong>Calcetines antiderrapantes.</strong> <span>Para entrar a las áreas de juego, niños y adultos. No se entra con zapatos ni descalzo.</span></div></li>
+            <li><span class="tick" style="--acc: var(--cielo)" aria-hidden="true">✓</span><div><strong>Si viene enfermito, mejor otro día.</strong> <span>Fiebre, tos persistente, diarrea o sarpullido: cuidamos a tu hijo y a los demás.</span></div></li>
+            <li><span class="tick" style="--acc: var(--uva)" aria-hidden="true">✓</span><div><strong>Sin alimentos externos.</strong> <span>Salvo fórmula, papilla o necesidad médica. Tampoco chicles.</span></div></li>
+          </ul>
+        </div>
+        <div class="card c-rosa">
+          <h3>Reglamento y privacidad</h3>
+          <p style="margin-bottom: var(--s3)">
+            El reglamento completo de uso de las instalaciones y el aviso de privacidad
+            integral se publican aquí y están disponibles en recepción. Al registrarte e
+            ingresar, los aceptas.
+          </p>
+          <p><a href="/reglamento">Reglamento de uso</a> · <a href="/aviso-de-privacidad">Aviso de privacidad</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="fiestas">
+    <div class="container">
+      <div class="party">
+        <div class="confeti" aria-hidden="true">
+          <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i>
+          <i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i>
+        </div>
+        <span class="sticker">¡Aparta tu fecha!</span>
+        <div class="party-inner">
+          <div>
+            <span class="kicker">Fiestas y eventos</span>
+            <h2>¿Cumpleaños? Aquí se arma.</h2>
+            <p>
+              Nos dices la fecha, cuántos niños y qué necesitas, y te mandamos el
+              paquete el mismo día.
+            </p>
+            <ul class="party-lista">
+              <li>Todas las áreas de juego</li>
+              <li>Barra y mesas para los grandes</li>
+              <li>Fecha y horario a tu medida</li>
+              <li>Cada invitado con su adulto responsable</li>
+            </ul>
+          </div>
+          <a class="btn btn-primary btn-xl" href="https://wa.me/528333890683" rel="noopener">Pedir cotización</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <img src="images/logo.png" alt="PiknPlay Playground" width="150" height="55" style="margin-bottom: var(--s3)" />
+        <p>
+          Plaza 3 Arcos, Calle Miguel Hidalgo y Costilla, Locales B-2 y B-3,<br />
+          Fraccionamiento Lomas del Naranjal, Tampico, Tamaulipas.
+        </p>
+      </div>
+      <div>
+        <h3>Contacto</h3>
+        <p>
+          <a href="https://wa.me/528333890683" rel="noopener">WhatsApp 833 389 0683</a><br />
+          <a href="mailto:contacto@piknplay.mx">contacto@piknplay.mx</a>
+        </p>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <p>
+          <a href="/reglamento">Reglamento de uso</a><br />
+          <a href="/aviso-de-privacidad">Aviso de privacidad</a>
+        </p>
+      </div>
+    </div>
+    <p class="legal">
+      GRUPO PIKNPLAY, S.A.S. · PiknPlay es un espacio de juego bajo la supervisión del
+      adulto que acompaña a cada menor; no es guardería ni servicio de cuidado de menores.
+    </p>
+  </div>
+</footer>
+
+<a class="fab" href="https://wa.me/528333890683" rel="noopener" aria-label="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-1.6-.8-2.7-1.5-3.8-3.4-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5s-.7-1.6-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5 1.9.8 2.6.9 3.5.8.6-.1 1.7-.7 1.9-1.4.2-.7.2-1.2.2-1.4-.1-.2-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15L2 22l5.1-1.3A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z"/></svg>
+</a>
+
+</body>
+</html>

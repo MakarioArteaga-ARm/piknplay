@@ -1,0 +1,12 @@
+/* Solo escritorio (min-width: 901px). Se carga con media attribute: el
+   navegador lo descarga pero no bloquea el render en móvil. */
+
+section { padding-block: clamp(52px, 5vw, 84px); }
+
+.facts { grid-template-columns: repeat(4, 1fr); gap: var(--s4); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-2 { grid-template-columns: 1.05fr .95fr; gap: 3.25rem; }
+.party-inner { grid-template-columns: 1.4fr auto; gap: var(--s5); }
+.footer-grid { grid-template-columns: 1.5fr 1fr 1fr; }
+
+.hero { padding-block: clamp(40px, 4vw, 64px) clamp(56px, 6vw, 88px); }

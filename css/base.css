@@ -1,0 +1,612 @@
+/*
+ * FUENTE DE VERDAD del CSS de PiknPlay Playground.
+ * Edita css/src/ — NUNCA css/ (son generados).
+ * Mismo contrato que armlaboral.com: el build minifica css/src/*.css → css/*.css
+ * y escribe el cache-buster ?v= en el HTML.
+ */
+
+:root {
+  /* Los seis colores del logotipo. Todo el acento del sitio sale de aquí. */
+  --ambar: #f2a11e;
+  --menta: #4fbd8a;
+  --naranja: #f4783a;
+  --rosa: #e8437f;
+  --cielo: #5aaee4;
+  --uva: #8b6fd4;
+
+  --ink: #2b2b36;
+  --muted: #5e5e70;
+  --card: #ffffff;
+  --line: rgba(43, 43, 54, .08);
+
+  --radius: 18px;
+  --radius-lg: 28px;
+  --radius-xl: 40px;
+  --pill: 999px;
+
+  --ring: 0 8px 26px rgba(43, 43, 54, .08);
+  --ring-hover: 0 18px 40px rgba(43, 43, 54, .16);
+  --glow: 0 24px 60px rgba(232, 67, 127, .18);
+
+  --s1: .5rem; --s2: .75rem; --s3: 1rem; --s4: 1.5rem; --s5: 2.5rem; --s6: 4rem;
+
+  --dur: 260ms;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  /* Rebote: se pasa del destino y regresa. Solo para el logotipo. */
+  --ease-rebote: cubic-bezier(.34, 1.56, .64, 1);
+  --focus: 0 0 0 3px #fff, 0 0 0 6px var(--cielo);
+
+  --display: "Baloo 2", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
+  /* Solo para el logotipo: la 'a' de un solo piso y los remates redondos
+     del original. Baloo 2 hace la 'a' de dos pisos y no se parecía. */
+  --wordmark: "Fredoka", "Baloo 2", ui-rounded, system-ui, sans-serif;
+  --body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --fab: 58px;
+
+  /* Momento en que arranca el logotipo. El confeti ocupa los primeros
+     0.55s; de aquí en adelante todo el logotipo se mide contra --t0,
+     así que mover la coreografía completa es cambiar este número. */
+  --t0: .6s;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: #fffdf8;
+  color: var(--ink);
+  font-family: var(--body);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Degradado de fondo. Capa fija detrás de todo: seis manchas de color del
+   logotipo sobre una base cálida. Va en un pseudo-elemento y no en `body`
+   para no pelearse con el scroll en iOS. */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(58rem 40rem at 8% -8%, rgba(90, 174, 228, .50), transparent 62%),
+    radial-gradient(52rem 36rem at 96% 2%, rgba(242, 161, 30, .46), transparent 64%),
+    radial-gradient(46rem 34rem at 78% 38%, rgba(139, 111, 212, .26), transparent 62%),
+    radial-gradient(50rem 36rem at 4% 52%, rgba(232, 67, 127, .26), transparent 62%),
+    radial-gradient(54rem 40rem at 88% 78%, rgba(79, 189, 138, .38), transparent 64%),
+    radial-gradient(46rem 34rem at 12% 98%, rgba(244, 120, 58, .30), transparent 62%),
+    linear-gradient(170deg, #fff8ec 0%, #fdf3f8 32%, #eff8fd 62%, #f1fbf5 82%, #fffaf0 100%);
+}
+
+h1, h2, h3 {
+  font-family: var(--display);
+  line-height: 1.1;
+  margin: 0 0 var(--s3);
+  text-wrap: balance;
+}
+h1 { font-size: clamp(2rem, 5.4vw, 3.35rem); font-weight: 800; letter-spacing: -.015em; }
+h2 { font-size: clamp(1.6rem, 3.8vw, 2.35rem); font-weight: 800; }
+h3 { font-size: 1.15rem; font-weight: 700; }
+p { margin: 0 0 var(--s3); }
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; }
+a:focus-visible { outline: none; box-shadow: var(--focus); border-radius: var(--pill); }
+
+/* Subrayado de marcador: el trazo va en el color que le toque a la sección. */
+.swash {
+  background-image: linear-gradient(
+    transparent 72%,
+    var(--swash, rgba(90, 174, 228, .38)) 72%,
+    var(--swash, rgba(90, 174, 228, .38)) 94%,
+    transparent 94%);
+  background-repeat: no-repeat;
+  padding-inline: .1em;
+}
+
+.container { width: min(1140px, 100%); margin-inline: auto; padding-inline: 20px; }
+section { padding-block: clamp(40px, 6vw, 72px); }
+
+/* Etiqueta de sección, una por color. */
+.kicker {
+  display: inline-block;
+  font-size: .76rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+  margin-bottom: var(--s2);
+}
+.k-rosa { color: var(--rosa); }
+.k-cielo { color: var(--cielo); }
+.k-menta { color: #2f9168; }
+.k-ambar { color: #c07c0c; }
+
+/* ---------- Encabezado ---------- */
+.site-header {
+  position: sticky;
+  top: env(safe-area-inset-top, 0px);
+  z-index: 50;
+  background: rgba(255, 253, 248, .72);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(255, 255, 255, .8);
+}
+.site-header .container {
+  min-height: 68px;
+  display: flex; align-items: center; justify-content: space-between; gap: var(--s3);
+}
+.brand img { width: 116px; }
+.nav { display: flex; align-items: center; gap: var(--s4); }
+.nav a { text-decoration: none; font-weight: 700; color: var(--muted); font-size: .95rem; transition: color var(--dur) var(--ease); }
+.nav a:hover { color: var(--rosa); }
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  font-family: var(--display); font-weight: 700; font-size: 1.05rem;
+  padding: .8rem 1.7rem; border-radius: var(--pill);
+  text-decoration: none; border: 2px solid transparent; cursor: pointer;
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.btn:hover { transform: translateY(-2px); box-shadow: var(--ring-hover); }
+.btn-primary { background: var(--rosa); color: #fff; box-shadow: var(--glow); }
+.btn-ghost { background: rgba(255, 255, 255, .85); color: var(--ink); border-color: #fff; box-shadow: var(--ring); }
+
+/* ---------- Hero: el logotipo, recreado con texto ---------- */
+/* El logotipo NO es una imagen aquí: son letras reales, cada una con su color,
+   su inclinación, su altura y su tamaño copiados del original — que está
+   dibujado a mano y no en una línea recta. El PNG sigue en /images para el
+   favicon y la imagen de Open Graph. */
+
+.hero {
+  position: relative;
+  padding-block: clamp(28px, 5vw, 56px) clamp(40px, 6vw, 72px);
+  text-align: center;
+}
+.hero > .container { position: relative; z-index: 1; }
+
+.hero-logo-wrap {
+  position: relative;
+  width: fit-content;
+  margin: 0 auto var(--s4);
+  transition: transform var(--dur) var(--ease);
+}
+.hero-logo-wrap:hover { transform: rotate(-1.6deg) scale(1.02); }
+
+.wordmark {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  font-family: var(--wordmark);
+  font-weight: 700;
+  font-size: clamp(2.9rem, 9.6vw, 6.1rem);
+  line-height: 1;
+  letter-spacing: -.012em;
+  animation: logo-flota 6s calc(var(--t0) + 2.85s) ease-in-out infinite;
+}
+
+/* La caja exterior lleva las animaciones; la interior, la pose fija de cada
+   letra. Separadas porque las dos usan transform y se pisarían. */
+.l {
+  display: inline-block;
+  position: relative;
+  transform-origin: 50% 88%;
+  animation:
+    var(--anim) var(--dur-e, .6s) var(--ease-rebote) var(--d, 0s) both,
+    meneo 6s calc(var(--t0) + 2.85s + var(--stagger, 0s)) ease-in-out infinite;
+}
+.l > .g {
+  display: inline-block;
+  transform: translateY(var(--ty, 0)) rotate(var(--tilt, 0deg));
+}
+
+/* Color, tamaño, inclinación y altura — leídos del logotipo original. */
+.l-p1 { --anim: desde-atras; --d: var(--t0);    --stagger: 0s;   color: var(--ambar);  font-size: 1.2em;  }
+.l-i  { --anim: cae;         --d: calc(var(--t0) + .4s);  --stagger: .04s; color: var(--menta);  font-size: .96em;  }
+.l-k  { --anim: converge;    --d: calc(var(--t0) + 1.7s); --stagger: .08s; color: var(--naranja); font-size: 1.02em; --dx: -190px; --dy: 130px; }
+.l-n  { --anim: desde-atras; --d: calc(var(--t0) + .9s); --stagger: .12s; color: var(--rosa);   font-size: .98em;  }
+.l-p2 { --anim: converge;    --d: calc(var(--t0) + 1.8s); --stagger: .16s; color: var(--cielo);  font-size: 1.16em; --dx: 165px;  --dy: -155px; }
+.l-l  { --anim: converge;    --d: calc(var(--t0) + 1.9s); --stagger: .20s; color: var(--menta);  font-size: 1.04em; --dx: 205px;  --dy: 125px; }
+.l-a  { --anim: converge;    --d: calc(var(--t0) + 2s); --stagger: .24s; color: var(--ambar);  font-size: .95em;  --dx: -160px; --dy: -140px; }
+.l-y  { --anim: converge;    --d: calc(var(--t0) + 2.1s); --stagger: .28s; color: var(--cielo);  font-size: 1.06em; --dx: 245px;  --dy: 45px; }
+
+/* El bamboleo: ninguna letra está derecha ni a la misma altura. */
+.l-p1 > .g { --tilt: -5deg;  --ty: .08em; }
+.l-i  > .g { --tilt: 3deg;   --ty: -.03em; }
+.l-k  > .g { --tilt: -2.5deg; --ty: .01em; }
+.l-n  > .g { --tilt: 4deg;   --ty: .02em; }
+.l-p2 > .g { --tilt: -3.5deg; --ty: .06em; }
+.l-l  > .g { --tilt: 2.5deg;  --ty: -.02em; }
+.l-a  > .g { --tilt: -4deg;  --ty: .03em; }
+.l-y  > .g { --tilt: 3.5deg;  --ty: -.01em; }
+
+/* El punto de la i va aparte para que caiga después que el palito. Por eso la
+   letra es una i sin punto (U+0131) y el punto es este pseudo-elemento. */
+.l-i::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: .78em;
+  width: .3em;
+  height: .3em;
+  margin-left: -.15em;
+  border-radius: 50%;
+  background: currentColor;
+  animation: cae-punto .4s var(--ease-rebote) calc(var(--t0) + .7s) both;
+}
+
+/* Los tres rayos que salen de la n. */
+.rayo {
+  position: absolute;
+  bottom: .88em;
+  width: .1em;
+  height: .32em;
+  border-radius: var(--pill);
+  transform-origin: 50% 100%;
+  animation: rayo-sale .35s var(--ease-rebote) var(--d, 1.5s) both;
+}
+.r1 { --rot: -34deg; --d: calc(var(--t0) + 1.3s); left: -6%;  background: var(--menta); }
+.r2 { --rot: -2deg;  --d: calc(var(--t0) + 1.38s); left: 42%;  background: var(--cielo); }
+.r3 { --rot: 32deg;  --d: calc(var(--t0) + 1.46s); right: -8%; background: var(--ambar); }
+
+.wordmark-sub {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: .95em;
+  margin-top: .08em;
+  font-family: var(--body);
+  font-weight: 700;
+  font-size: clamp(.66rem, 2vw, .98rem);
+  letter-spacing: .38em;
+  text-indent: .38em;
+  color: #33333a;
+  animation: sube .5s var(--ease) calc(var(--t0) + 2.6s) both;
+}
+.wordmark-sub .punto {
+  width: .78em;
+  height: .78em;
+  border-radius: 50%;
+  background: var(--rosa);
+  flex: 0 0 auto;
+}
+
+/* --- Confeti del fondo --- */
+/* Detrás del contenido del hero, sin capturar clics. Entra con un pop al
+   cargar y luego se queda meciéndose. */
+.confeti {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.confeti i {
+  position: absolute;
+  display: block;
+  border-radius: 50%;
+  opacity: 0;
+  animation:
+    confeti-entra .5s var(--ease-rebote) var(--d, 0s) both,
+    confeti-flota var(--t, 9s) ease-in-out calc(var(--d, 0s) + .5s) infinite;
+}
+/* Las barritas: mismo elemento, distinta forma. */
+.confeti i.barra { border-radius: var(--pill); }
+
+.confeti i:nth-child(1) { --d: 0.05s; --t: 8.4s; --rot: 34deg; top: 1.5%; left: 15.2%; width: 8px; height: 8px; background: var(--ambar); }
+.confeti i:nth-child(2) { --d: 0.06s; --t: 8.2s; --rot: 21deg; top: 4.4%; right: 5.1%; width: 9px; height: 20px; background: var(--menta); }
+.confeti i:nth-child(3) { --d: 0.07s; --t: 8.3s; --rot: -19deg; top: 2.6%; left: 19.4%; width: 16px; height: 16px; background: var(--cielo); }
+.confeti i:nth-child(4) { --d: 0.08s; --t: 10.9s; --rot: 16deg; top: 8.1%; right: 42.7%; width: 8px; height: 8px; background: var(--rosa); }
+.confeti i:nth-child(5) { --d: 0.08s; --t: 9.4s; --rot: -16deg; top: 5.6%; left: 3.2%; width: 10px; height: 10px; background: var(--uva); }
+.confeti i:nth-child(6) { --d: 0.09s; --t: 8.5s; --rot: -10deg; top: 10.6%; right: 24.8%; width: 9px; height: 20px; background: var(--naranja); }
+.confeti i:nth-child(7) { --d: 0.1s; --t: 10.8s; --rot: -8deg; top: 12.0%; left: 17.4%; width: 9px; height: 9px; background: var(--ambar); }
+.confeti i:nth-child(8) { --d: 0.11s; --t: 10.3s; --rot: 24deg; top: 13.4%; right: 22.8%; width: 14px; height: 14px; background: var(--menta); }
+.confeti i:nth-child(9) { --d: 0.12s; --t: 8.4s; --rot: 4deg; top: 12.2%; left: 16.9%; width: 7px; height: 20px; background: var(--cielo); }
+.confeti i:nth-child(10) { --d: 0.13s; --t: 9.4s; --rot: -25deg; top: 20.0%; right: 24.1%; width: 18px; height: 18px; background: var(--rosa); }
+.confeti i:nth-child(11) { --d: 0.14s; --t: 8.8s; --rot: 28deg; top: 17.0%; left: 6.2%; width: 14px; height: 14px; background: var(--uva); }
+.confeti i:nth-child(12) { --d: 0.14s; --t: 9.7s; --rot: 10deg; top: 24.1%; right: 19.6%; width: 7px; height: 22px; background: var(--naranja); }
+.confeti i:nth-child(13) { --d: 0.15s; --t: 8.3s; --rot: -23deg; top: 21.8%; left: 27.2%; width: 18px; height: 18px; background: var(--ambar); }
+.confeti i:nth-child(14) { --d: 0.16s; --t: 8.3s; --rot: 5deg; top: 22.4%; right: 42.6%; width: 9px; height: 9px; background: var(--menta); }
+.confeti i:nth-child(15) { --d: 0.17s; --t: 9.4s; --rot: 15deg; top: 29.1%; left: 29.5%; width: 18px; height: 18px; background: var(--cielo); }
+.confeti i:nth-child(16) { --d: 0.18s; --t: 8.8s; --rot: -20deg; top: 24.3%; right: 40.0%; width: 8px; height: 22px; background: var(--rosa); }
+.confeti i:nth-child(17) { --d: 0.19s; --t: 8.6s; --rot: -3deg; top: 24.6%; left: 22.7%; width: 13px; height: 13px; background: var(--uva); }
+.confeti i:nth-child(18) { --d: 0.2s; --t: 8.4s; --rot: 23deg; top: 33.1%; right: 18.5%; width: 18px; height: 18px; background: var(--naranja); }
+.confeti i:nth-child(19) { --d: 0.21s; --t: 12.3s; --rot: 1deg; top: 28.3%; left: 18.7%; width: 7px; height: 24px; background: var(--ambar); }
+.confeti i:nth-child(20) { --d: 0.21s; --t: 12.8s; --rot: -15deg; top: 37.0%; right: 32.1%; width: 16px; height: 16px; background: var(--menta); }
+.confeti i:nth-child(21) { --d: 0.22s; --t: 8.1s; --rot: -11deg; top: 30.2%; left: 4.7%; width: 12px; height: 12px; background: var(--cielo); }
+.confeti i:nth-child(22) { --d: 0.23s; --t: 11.0s; --rot: 6deg; top: 30.4%; right: 12.6%; width: 8px; height: 22px; background: var(--rosa); }
+.confeti i:nth-child(23) { --d: 0.24s; --t: 10.3s; --rot: 16deg; top: 38.8%; left: 42.9%; width: 8px; height: 8px; background: var(--uva); }
+.confeti i:nth-child(24) { --d: 0.25s; --t: 11.2s; --rot: -27deg; top: 37.4%; right: 18.5%; width: 18px; height: 18px; background: var(--naranja); }
+.confeti i:nth-child(25) { --d: 0.26s; --t: 8.8s; --rot: 9deg; top: 44.9%; left: 9.4%; width: 18px; height: 18px; background: var(--ambar); }
+.confeti i:nth-child(26) { --d: 0.27s; --t: 10.7s; --rot: 12deg; top: 37.7%; right: 27.4%; width: 9px; height: 20px; background: var(--menta); }
+.confeti i:nth-child(27) { --d: 0.27s; --t: 11.1s; --rot: -15deg; top: 38.9%; left: 28.0%; width: 12px; height: 12px; background: var(--cielo); }
+.confeti i:nth-child(28) { --d: 0.28s; --t: 10.4s; --rot: -20deg; top: 49.4%; right: 28.9%; width: 14px; height: 14px; background: var(--rosa); }
+.confeti i:nth-child(29) { --d: 0.29s; --t: 10.4s; --rot: -24deg; top: 51.3%; left: 38.4%; width: 8px; height: 24px; background: var(--uva); }
+.confeti i:nth-child(30) { --d: 0.3s; --t: 10.4s; --rot: -14deg; top: 50.5%; right: 7.3%; width: 13px; height: 13px; background: var(--naranja); }
+.confeti i:nth-child(31) { --d: 0.31s; --t: 8.7s; --rot: -31deg; top: 46.6%; left: 23.7%; width: 14px; height: 14px; background: var(--ambar); }
+.confeti i:nth-child(32) { --d: 0.32s; --t: 11.5s; --rot: -1deg; top: 49.2%; right: 34.4%; width: 9px; height: 18px; background: var(--menta); }
+.confeti i:nth-child(33) { --d: 0.33s; --t: 11.9s; --rot: 34deg; top: 56.8%; left: 23.8%; width: 14px; height: 14px; background: var(--cielo); }
+.confeti i:nth-child(34) { --d: 0.33s; --t: 11.1s; --rot: -10deg; top: 54.4%; right: 24.8%; width: 12px; height: 12px; background: var(--rosa); }
+.confeti i:nth-child(35) { --d: 0.34s; --t: 9.0s; --rot: 29deg; top: 59.1%; left: 36.5%; width: 12px; height: 12px; background: var(--uva); }
+.confeti i:nth-child(36) { --d: 0.35s; --t: 10.4s; --rot: -10deg; top: 52.8%; right: 16.6%; width: 7px; height: 22px; background: var(--naranja); }
+.confeti i:nth-child(37) { --d: 0.36s; --t: 12.0s; --rot: 10deg; top: 63.7%; left: 31.5%; width: 18px; height: 18px; background: var(--ambar); }
+.confeti i:nth-child(38) { --d: 0.37s; --t: 8.5s; --rot: 26deg; top: 59.3%; right: 43.0%; width: 12px; height: 12px; background: var(--menta); }
+.confeti i:nth-child(39) { --d: 0.38s; --t: 10.4s; --rot: 10deg; top: 59.3%; left: 9.7%; width: 9px; height: 18px; background: var(--cielo); }
+.confeti i:nth-child(40) { --d: 0.39s; --t: 12.5s; --rot: -9deg; top: 59.7%; right: 36.2%; width: 9px; height: 9px; background: var(--rosa); }
+.confeti i:nth-child(41) { --d: 0.39s; --t: 8.4s; --rot: 16deg; top: 62.2%; left: 22.0%; width: 14px; height: 14px; background: var(--uva); }
+.confeti i:nth-child(42) { --d: 0.4s; --t: 8.9s; --rot: -18deg; top: 69.5%; right: 21.4%; width: 7px; height: 20px; background: var(--naranja); }
+.confeti i:nth-child(43) { --d: 0.41s; --t: 12.0s; --rot: -16deg; top: 69.5%; left: 2.2%; width: 18px; height: 18px; background: var(--ambar); }
+.confeti i:nth-child(44) { --d: 0.42s; --t: 11.3s; --rot: 10deg; top: 71.2%; right: 27.9%; width: 18px; height: 18px; background: var(--menta); }
+.confeti i:nth-child(45) { --d: 0.43s; --t: 8.1s; --rot: -21deg; top: 72.3%; left: 7.9%; width: 8px; height: 8px; background: var(--cielo); }
+.confeti i:nth-child(46) { --d: 0.44s; --t: 12.1s; --rot: -7deg; top: 77.7%; right: 24.2%; width: 8px; height: 20px; background: var(--rosa); }
+.confeti i:nth-child(47) { --d: 0.45s; --t: 11.8s; --rot: 7deg; top: 72.1%; left: 2.2%; width: 12px; height: 12px; background: var(--uva); }
+.confeti i:nth-child(48) { --d: 0.46s; --t: 8.3s; --rot: 11deg; top: 75.7%; right: 12.4%; width: 10px; height: 10px; background: var(--naranja); }
+.confeti i:nth-child(49) { --d: 0.46s; --t: 12.1s; --rot: 30deg; top: 79.8%; left: 40.5%; width: 9px; height: 24px; background: var(--ambar); }
+.confeti i:nth-child(50) { --d: 0.47s; --t: 12.4s; --rot: -11deg; top: 76.2%; right: 6.8%; width: 8px; height: 8px; background: var(--menta); }
+.confeti i:nth-child(51) { --d: 0.48s; --t: 8.9s; --rot: 26deg; top: 84.1%; left: 27.8%; width: 10px; height: 10px; background: var(--cielo); }
+.confeti i:nth-child(52) { --d: 0.49s; --t: 11.4s; --rot: 33deg; top: 79.1%; right: 28.2%; width: 7px; height: 22px; background: var(--rosa); }
+.confeti i:nth-child(53) { --d: 0.5s; --t: 12.4s; --rot: -27deg; top: 87.3%; left: 25.4%; width: 9px; height: 9px; background: var(--uva); }
+.confeti i:nth-child(54) { --d: 0.51s; --t: 10.5s; --rot: -31deg; top: 83.8%; right: 11.9%; width: 9px; height: 9px; background: var(--naranja); }
+.confeti i:nth-child(55) { --d: 0.52s; --t: 9.6s; --rot: 30deg; top: 91.8%; left: 34.4%; width: 18px; height: 18px; background: var(--ambar); }
+.confeti i:nth-child(56) { --d: 0.52s; --t: 10.5s; --rot: 27deg; top: 86.2%; right: 27.7%; width: 8px; height: 24px; background: var(--menta); }
+.confeti i:nth-child(57) { --d: 0.53s; --t: 12.6s; --rot: -9deg; top: 88.3%; left: 23.3%; width: 13px; height: 13px; background: var(--cielo); }
+.confeti i:nth-child(58) { --d: 0.54s; --t: 10.0s; --rot: 6deg; top: 88.8%; right: 38.0%; width: 9px; height: 9px; background: var(--rosa); }
+
+/* --- Los movimientos --- */
+
+@keyframes desde-atras {
+  from { opacity: 0; transform: scale(.16); }
+  70%  { opacity: 1; transform: scale(1.14); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes cae {
+  from { opacity: 0; transform: translateY(-1.1em); }
+  70%  { opacity: 1; transform: translateY(.07em); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes cae-punto {
+  from { opacity: 0; transform: translateY(-.7em) scale(.5); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes rayo-sale {
+  from { opacity: 0; transform: rotate(var(--rot)) scaleY(0); }
+  70%  { opacity: 1; transform: rotate(var(--rot)) scaleY(1.35); }
+  to   { opacity: 1; transform: rotate(var(--rot)) scaleY(1); }
+}
+@keyframes converge {
+  from { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.55) rotate(-12deg); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes sube {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+/* El meneo: sacudida corta al principio del ciclo y quieta el resto.
+   Con 6s de ciclo, se menean ~1s y descansan 5s. */
+@keyframes meneo {
+  0%  { transform: rotate(0deg) translateY(0); }
+  3%  { transform: rotate(7deg) translateY(-4px); }
+  7%  { transform: rotate(-6deg) translateY(0); }
+  11% { transform: rotate(4.5deg) translateY(-2px); }
+  15% { transform: rotate(-2.5deg) translateY(0); }
+  19% { transform: rotate(0deg) translateY(0); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+@keyframes logo-flota {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+@keyframes confeti-entra {
+  from { opacity: 0; transform: rotate(var(--rot, 0deg)) scale(0); }
+  to   { opacity: .78; transform: rotate(var(--rot, 0deg)) scale(1); }
+}
+@keyframes confeti-flota {
+  0%, 100% { opacity: .78; transform: rotate(var(--rot, 0deg)) translateY(0); }
+  50%      { opacity: .5;  transform: rotate(calc(var(--rot, 0deg) + 10deg)) translateY(-16px); }
+}
+
+/* --- Resto del hero --- */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: .55rem;
+  background: rgba(255, 255, 255, .9);
+  border: 1px solid #fff; color: var(--muted);
+  font-weight: 700; font-size: .82rem; letter-spacing: .02em;
+  padding: .4rem 1rem; border-radius: var(--pill); margin-bottom: var(--s4);
+  box-shadow: var(--ring);
+}
+.eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--menta); }
+.hero .lead { font-size: clamp(1.02rem, 1.6vw, 1.16rem); color: var(--muted); max-width: 54ch; margin-inline: auto; }
+.hero .actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s4); justify-content: center; }
+.hero-note {
+  margin: var(--s4) auto 0; font-size: .93rem; color: var(--muted); max-width: 56ch;
+  background: rgba(255, 255, 255, .7); border-radius: var(--radius);
+  padding: var(--s2) var(--s3);
+}
+
+/* Tira de datos rápidos, un color por dato. */
+.facts { display: grid; gap: var(--s3); margin-top: var(--s5); }
+.fact {
+  background: rgba(255, 255, 255, .88);
+  border-radius: var(--radius-lg);
+  border-top: 5px solid var(--acc, var(--cielo));
+  padding: var(--s4) var(--s3);
+  text-align: center;
+  box-shadow: var(--ring);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.fact:hover { transform: translateY(-4px); box-shadow: var(--ring-hover); }
+.fact .chip {
+  width: 46px; height: 46px; border-radius: 16px; margin: 0 auto var(--s2);
+  display: grid; place-items: center; font-size: 1.3rem;
+  background: color-mix(in srgb, var(--acc) 16%, #fff);
+}
+.fact strong { display: block; font-family: var(--display); font-size: 1.02rem; }
+.fact span { font-size: .9rem; color: var(--muted); }
+.f-ambar { --acc: var(--ambar); }
+.f-menta { --acc: var(--menta); }
+.f-cielo { --acc: var(--cielo); }
+.f-rosa  { --acc: var(--rosa); }
+
+/* ---------- Panel: las secciones flotan sobre el degradado ---------- */
+.panel {
+  background: rgba(255, 255, 255, .74);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, .9);
+  border-radius: var(--radius-xl);
+  padding: clamp(26px, 4vw, 52px);
+  box-shadow: var(--ring);
+}
+.section-head { max-width: 58ch; margin-bottom: var(--s5); }
+.section-head p { color: var(--muted); margin: 0; }
+
+.grid-3 { display: grid; gap: var(--s4); }
+.grid-2 { display: grid; gap: var(--s5); align-items: start; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 5px solid var(--acc, var(--cielo));
+  border-radius: var(--radius-lg);
+  padding: var(--s4);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.card:hover { transform: translateY(-4px); box-shadow: var(--ring-hover); }
+.card p { color: var(--muted); margin-bottom: 0; font-size: .96rem; }
+.c-ambar { --acc: var(--ambar); }
+.c-menta { --acc: var(--menta); }
+.c-cielo { --acc: var(--cielo); }
+.c-uva   { --acc: var(--uva); }
+.c-rosa  { --acc: var(--rosa); }
+
+.step {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-family: var(--display); font-weight: 800; font-size: 1.2rem; color: #fff;
+  margin-bottom: var(--s3);
+  background: var(--acc);
+}
+
+.rules { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+.rules li { display: flex; gap: var(--s3); align-items: flex-start; }
+.tick {
+  flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--acc, var(--menta)); color: #fff;
+  display: grid; place-items: center; font-weight: 800; font-size: .82rem; margin-top: 2px;
+}
+.rules strong { font-family: var(--display); font-weight: 700; }
+.rules span { color: var(--muted); }
+
+/* ---------- Fiestas ---------- */
+/* La sección que vende. Degradado que se mueve, confeti propio, un sticker
+   ladeado y la lista de lo que incluye. */
+.party {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(120deg, var(--rosa) 0%, var(--naranja) 34%, var(--ambar) 62%, var(--rosa) 100%);
+  background-size: 300% 300%;
+  animation: fiesta-degradado 16s ease-in-out infinite;
+  color: #fff;
+  border-radius: var(--radius-xl);
+  padding: clamp(32px, 5vw, 64px);
+  box-shadow: 0 26px 60px rgba(232, 67, 127, .3);
+}
+.party > * { position: relative; z-index: 1; }
+.party .confeti { z-index: 0; }
+/* El confeti de aquí va en blanco: sobre el degradado los colores se pierden.
+   El :nth-child(n) es para ganarle en especificidad a las reglas de posición. */
+.party .confeti i:nth-child(n) { background: rgba(255, 255, 255, .55); }
+
+.party .kicker { color: rgba(255, 255, 255, .88); }
+.party h2 { color: #fff; margin-bottom: var(--s3); font-size: clamp(1.9rem, 4.6vw, 3rem); }
+.party p { color: rgba(255, 255, 255, .95); max-width: 52ch; margin-bottom: var(--s4); }
+.party-inner { display: grid; gap: var(--s5); align-items: center; }
+
+/* Sticker ladeado, como pegado encima. */
+.sticker {
+  position: absolute;
+  top: clamp(14px, 3vw, 26px);
+  right: clamp(14px, 3vw, 30px);
+  z-index: 2;
+  background: #fff;
+  color: var(--rosa);
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: clamp(.82rem, 1.7vw, 1rem);
+  padding: .5rem 1.1rem;
+  border-radius: var(--pill);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
+  transform: rotate(7deg);
+  animation: sticker-late 3.2s ease-in-out infinite;
+}
+
+/* Lo que incluye, en pastillas. */
+.party-lista { list-style: none; margin: 0 0 var(--s4); padding: 0; display: flex; flex-wrap: wrap; gap: var(--s2); }
+.party-lista li {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: rgba(255, 255, 255, .18);
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: var(--pill);
+  padding: .45rem 1rem;
+  font-size: .92rem;
+  font-weight: 700;
+}
+.party-lista li::before { content: "✓"; font-size: .8rem; opacity: .9; }
+
+.btn-xl { font-size: 1.18rem; padding: 1.05rem 2.3rem; }
+.party .btn-primary {
+  background: #fff; color: var(--rosa);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .2);
+  animation: latido 2.8s ease-in-out infinite;
+}
+.party .btn-primary:hover { animation-play-state: paused; }
+
+@keyframes fiesta-degradado {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+@keyframes sticker-late {
+  0%, 100% { transform: rotate(7deg) scale(1); }
+  50% { transform: rotate(4deg) scale(1.05); }
+}
+@keyframes latido {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+
+/* ---------- Pie ---------- */
+.site-footer {
+  background: rgba(255, 255, 255, .86);
+  backdrop-filter: blur(10px);
+  border-top: 5px solid transparent;
+  border-image: linear-gradient(90deg, var(--ambar), var(--menta), var(--naranja), var(--rosa), var(--uva), var(--cielo)) 1;
+  margin-top: var(--s5);
+  padding-block: var(--s5);
+  padding-bottom: calc(var(--s5) + var(--fab) + 28px + env(safe-area-inset-bottom, 0px));
+  font-size: .93rem; color: var(--muted);
+}
+.footer-grid { display: grid; gap: var(--s5); }
+.site-footer h3 {
+  font-family: var(--body); font-size: .76rem; font-weight: 800;
+  color: var(--ink); text-transform: uppercase; letter-spacing: .1em; margin-bottom: var(--s2);
+}
+.site-footer a { color: var(--muted); }
+.site-footer a:hover { color: var(--rosa); }
+.legal { margin-top: var(--s4); padding-top: var(--s4); border-top: 1px solid var(--line); font-size: .84rem; }
+
+/* ---------- Flotante de WhatsApp ---------- */
+.fab {
+  position: fixed; right: 18px;
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  z-index: 60; width: var(--fab); height: var(--fab); border-radius: 50%;
+  background: #25d366; color: #fff; display: grid; place-items: center;
+  box-shadow: var(--ring-hover); text-decoration: none;
+  transition: transform var(--dur) var(--ease);
+}
+.fab:hover { transform: scale(1.07); }
+.fab svg { width: 29px; height: 29px; fill: currentColor; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
