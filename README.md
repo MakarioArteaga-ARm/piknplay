@@ -27,8 +27,29 @@ images/logo.png         Logotipo original (favicon y Open Graph)
 scripts/dev/            Servidor estático de desarrollo
 scripts/build/          Empaquetador del preview de un archivo
 _headers                Cabeceras de seguridad y caché (Cloudflare Pages)
-_redirects              Redirecciones y rutas bloqueadas
+_redirects              URLs limpias
+functions/_middleware   Cierra los archivos internos en el despliegue
 ```
+
+## Despliegue
+
+Cloudflare Pages, conectado a este repo. **Sin paso de compilación**: el
+despliegue publica lo que está commiteado.
+
+| Ajuste | Valor |
+|---|---|
+| Framework preset | None |
+| Build command | *(vacío)* |
+| Build output directory | `/` |
+| Production branch | `main` |
+
+### Por qué existe `functions/_middleware.js`
+
+Pages publica **todo** lo que está en el repo, incluidos `scripts/` y
+`css/src/`. Bloquearlos desde `_redirects` no funciona: esas reglas solo se
+aplican a rutas que **no** existen como archivo, y esos archivos sí existen en
+el despliegue, así que ganan y la regla nunca se evalúa. Las Functions corren
+antes que los archivos estáticos, por eso el bloqueo va ahí.
 
 ### El CSS va partido en tres
 

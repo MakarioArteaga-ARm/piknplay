@@ -1,7 +1,6 @@
-# Rutas internas que Cloudflare desplegaría por estar en el repo pero que no
-# son parte del sitio público.
-/scripts/*   /404.html   404
-/css/src/*   /404.html   404
+# Los archivos internos (scripts, CSS sin minificar, configuración) los cierra
+# functions/_middleware.js y NO este archivo: _redirects no se aplica a rutas
+# que ya existen como archivo, y esos archivos existen en el despliegue.
 
 # URLs limpias: /reglamento sirve reglamento.html
 /:splat.html   /:splat   301
