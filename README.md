@@ -87,6 +87,26 @@ Toma `index.html` + `css/src/*.css` y los empaqueta en un HTML autocontenido
 (CSS embebido, sin `<head>`), para publicarlo sin servidor. Es derivado: no se
 edita a mano.
 
+### La tarjeta de Open Graph
+
+`images/og.jpg` es lo que se ve cuando alguien pega el link en WhatsApp,
+Facebook o X. Se genera, no se dibuja:
+
+```bash
+python3 scripts/og/generar-og.py
+```
+
+Python y no Node como el resto del repo a propósito: ARm arma sus tarjetas con
+Playwright + sharp (renderiza una plantilla HTML y la fotografía), que son
+cientos de megas de dependencias. Aquí la tarjeta es una composición fija y
+Pillow —que ya viene en el sistema— la arma sin instalar nada. Las tipografías
+se bajan a `scripts/og/.fonts/` la primera vez; están ignoradas por git porque
+son insumo del generador, no del sitio.
+
+La URL del `og:image` es absoluta y apunta al host donde el sitio se sirve: el
+rastreador de WhatsApp la abre desde su propio servidor, y una ruta relativa
+no le serviría.
+
 ## Pendientes
 
 - Tarifas, horarios y fotos del local — los tiene que dar el cliente.
@@ -95,4 +115,4 @@ edita a mano.
   directivas vuelven a `'self'`.
 - `scripts/build/minify.mjs` (minificado + cache-buster).
 - Páginas de reglamento y aviso de privacidad (el pie ya enlaza a ambas).
-- `sitemap.xml`, favicon e imagen de Open Graph.
+- `sitemap.xml` y favicon.
