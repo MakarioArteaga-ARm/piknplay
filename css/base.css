@@ -1209,6 +1209,15 @@ main > section { position: relative; z-index: 1; }
 .legal-cuerpo h2:nth-of-type(6n)   span { background: var(--naranja); }
 
 .legal-cuerpo p { color: var(--muted); }
+.legal-cuerpo .intro { color: var(--ink); }
+/* El apartado de datos sensibles se destaca: es el que de verdad conviene
+   que la gente lea antes de firmar. */
+.legal-cuerpo .destacado {
+  background: rgba(232, 67, 127, .07);
+  border-left: 4px solid var(--rosa);
+  border-radius: var(--radius);
+  padding: var(--s3);
+}
 .legal-cuerpo .cierre {
   margin-top: var(--s5); padding-top: var(--s4);
   border-top: 1px solid var(--line); color: var(--ink); font-weight: 600;
