@@ -1181,6 +1181,40 @@ main > section { position: relative; z-index: 1; }
   50% { background-position: 100% 50%; }
 }
 
+/* ---------- Páginas de texto legal ---------- */
+/* Sin confeti: aquí la gente viene a leer, no a mirar. El fondo degradado se
+   queda, pero el texto se apoya en un panel para que el contraste no dependa
+   de qué color le tocó atrás. */
+.legal { width: min(760px, 100%); }
+.legal h1 { font-size: clamp(1.9rem, 4.6vw, 2.8rem); }
+.legal .lead { font-size: 1.06rem; color: var(--muted); margin-bottom: var(--s5); }
+
+.legal-cuerpo h2 {
+  display: flex; align-items: center; gap: .6rem;
+  font-size: 1.22rem; margin-top: var(--s5); margin-bottom: var(--s2);
+}
+.legal-cuerpo h2:first-child { margin-top: 0; }
+.legal-cuerpo h2 span {
+  flex: 0 0 auto; width: 34px; height: 34px; border-radius: 50%;
+  display: grid; place-items: center;
+  font-size: .92rem; color: #fff; background: var(--cielo);
+}
+/* Cada sección con un color distinto: la numeración sirve para orientarse en
+   un texto largo, y el color hace de marcapáginas. */
+.legal-cuerpo h2:nth-of-type(6n+1) span { background: var(--ambar); }
+.legal-cuerpo h2:nth-of-type(6n+2) span { background: var(--menta); }
+.legal-cuerpo h2:nth-of-type(6n+3) span { background: var(--cielo); }
+.legal-cuerpo h2:nth-of-type(6n+4) span { background: var(--rosa); }
+.legal-cuerpo h2:nth-of-type(6n+5) span { background: var(--uva); }
+.legal-cuerpo h2:nth-of-type(6n)   span { background: var(--naranja); }
+
+.legal-cuerpo p { color: var(--muted); }
+.legal-cuerpo .cierre {
+  margin-top: var(--s5); padding-top: var(--s4);
+  border-top: 1px solid var(--line); color: var(--ink); font-weight: 600;
+}
+.legal-pie { margin-top: var(--s4); font-size: .86rem; color: var(--muted); text-align: center; }
+
 /* ---------- Pie ---------- */
 .site-footer {
   background: rgba(255, 255, 255, .86);
