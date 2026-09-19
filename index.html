@@ -79,15 +79,25 @@
 
 <main id="inicio">
 
+  <!-- Confeti de fondo de toda la página. Va aquí dentro y no en el body
+       para que empiece bajo el encabezado y no se meta al pie. -->
+  <div class="confeti" aria-hidden="true">
+    <i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i>
+    <i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i>
+    <i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i>
+    <i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i>
+    <i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i>
+    <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i>
+    <i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i>
+    <i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i>
+    <i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i>
+    <i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i>
+    <i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i>
+    <i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i>
+    <i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i>
+  </div>
+
   <section class="hero">
-      <div class="confeti" aria-hidden="true">
-        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i class="barra"></i><i></i>
-        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i class="barra"></i><i></i>
-        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i class="barra"></i><i></i>
-        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i class="barra"></i><i></i>
-        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i class="barra"></i><i></i>
-        <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i><i></i>
-      </div>
     <div class="container">
       <!-- El logotipo va como texto, no como imagen, para poder animar letra
            por letra. role="img" + aria-label: el lector de pantalla lee el
@@ -109,7 +119,7 @@
       </p>
       <div class="actions">
         <a class="btn btn-primary" href="https://wa.me/528333890683" rel="noopener">Cotizar una fiesta</a>
-        <a class="btn btn-ghost" href="#como-funciona">Cómo funciona</a>
+        <a class="btn btn-menta" href="#como-funciona">Cómo funciona</a>
       </div>
       <p class="hero-note">
         PiknPlay es un espacio de juego <strong>bajo la supervisión del adulto que acompaña</strong>.
@@ -182,7 +192,7 @@
         </article>
         <article class="card c-uva">
           <h3>Estructuras de juego</h3>
-          <p>Nuestro equipo anda en las áreas echando ojo: acomoda turnos cuando un juego se llena y le da la mano al que se quedó atorado a medio camino.</p>
+          <p>Nuestro personal supervisa las áreas: acomoda turnos cuando un juego se llena y le da la mano al que se quedó atorado a medio camino.</p>
         </article>
         <article class="card c-ambar">
           <h3>Barra y mesas</h3>

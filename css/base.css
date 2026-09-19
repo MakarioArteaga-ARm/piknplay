@@ -152,7 +152,13 @@ section { padding-block: clamp(40px, 6vw, 72px); }
 }
 .btn:hover { transform: translateY(-2px); box-shadow: var(--ring-hover); }
 .btn-primary { background: var(--rosa); color: #fff; box-shadow: var(--glow); }
-.btn-ghost { background: rgba(255, 255, 255, .85); color: var(--ink); border-color: #fff; box-shadow: var(--ring); }
+/* Los secundarios ya no son blancos: toman los colores de las letras del
+   logotipo. El texto va en tinta oscura porque sobre estos cinco colores el
+   blanco no llega al contraste mínimo. */
+.btn-ambar   { background: var(--ambar);   color: var(--ink); box-shadow: var(--ring); }
+.btn-menta   { background: var(--menta);   color: var(--ink); box-shadow: var(--ring); }
+.btn-naranja { background: var(--naranja); color: var(--ink); box-shadow: var(--ring); }
+.btn-cielo   { background: var(--cielo);   color: var(--ink); box-shadow: var(--ring); }
 
 /* ---------- Hero: el logotipo, recreado con texto ---------- */
 /* El logotipo NO es una imagen aquí: son letras reales, cada una con su color,
@@ -274,8 +280,15 @@ section { padding-block: clamp(40px, 6vw, 72px); }
 }
 
 /* --- Confeti del fondo --- */
-/* Detrás del contenido del hero, sin capturar clics. Entra con un pop al
-   cargar y luego se queda meciéndose. */
+/* Vive dentro de <main>, no del hero: así empieza justo debajo del
+   encabezado y termina donde arranca el pie, que queda limpio. No captura
+   clics. Entra con un pop escalonado al cargar y se queda meciéndose.
+   --op controla qué tan translúcido va cada grupo. */
+main { position: relative; }
+main > .confeti { position: absolute; inset: 0; z-index: 0; }
+/* El contenido va encima del confeti. */
+main > section { position: relative; z-index: 1; }
+
 .confeti {
   position: absolute;
   inset: 0;
@@ -295,64 +308,266 @@ section { padding-block: clamp(40px, 6vw, 72px); }
 /* Las barritas: mismo elemento, distinta forma. */
 .confeti i.barra { border-radius: var(--pill); }
 
-.confeti i:nth-child(1) { --d: 0.05s; --t: 8.4s; --rot: 34deg; top: 1.5%; left: 15.2%; width: 8px; height: 8px; background: var(--ambar); }
-.confeti i:nth-child(2) { --d: 0.06s; --t: 8.2s; --rot: 21deg; top: 4.4%; right: 5.1%; width: 9px; height: 20px; background: var(--menta); }
-.confeti i:nth-child(3) { --d: 0.07s; --t: 8.3s; --rot: -19deg; top: 2.6%; left: 19.4%; width: 16px; height: 16px; background: var(--cielo); }
-.confeti i:nth-child(4) { --d: 0.08s; --t: 10.9s; --rot: 16deg; top: 8.1%; right: 42.7%; width: 8px; height: 8px; background: var(--rosa); }
-.confeti i:nth-child(5) { --d: 0.08s; --t: 9.4s; --rot: -16deg; top: 5.6%; left: 3.2%; width: 10px; height: 10px; background: var(--uva); }
-.confeti i:nth-child(6) { --d: 0.09s; --t: 8.5s; --rot: -10deg; top: 10.6%; right: 24.8%; width: 9px; height: 20px; background: var(--naranja); }
-.confeti i:nth-child(7) { --d: 0.1s; --t: 10.8s; --rot: -8deg; top: 12.0%; left: 17.4%; width: 9px; height: 9px; background: var(--ambar); }
-.confeti i:nth-child(8) { --d: 0.11s; --t: 10.3s; --rot: 24deg; top: 13.4%; right: 22.8%; width: 14px; height: 14px; background: var(--menta); }
-.confeti i:nth-child(9) { --d: 0.12s; --t: 8.4s; --rot: 4deg; top: 12.2%; left: 16.9%; width: 7px; height: 20px; background: var(--cielo); }
-.confeti i:nth-child(10) { --d: 0.13s; --t: 9.4s; --rot: -25deg; top: 20.0%; right: 24.1%; width: 18px; height: 18px; background: var(--rosa); }
-.confeti i:nth-child(11) { --d: 0.14s; --t: 8.8s; --rot: 28deg; top: 17.0%; left: 6.2%; width: 14px; height: 14px; background: var(--uva); }
-.confeti i:nth-child(12) { --d: 0.14s; --t: 9.7s; --rot: 10deg; top: 24.1%; right: 19.6%; width: 7px; height: 22px; background: var(--naranja); }
-.confeti i:nth-child(13) { --d: 0.15s; --t: 8.3s; --rot: -23deg; top: 21.8%; left: 27.2%; width: 18px; height: 18px; background: var(--ambar); }
-.confeti i:nth-child(14) { --d: 0.16s; --t: 8.3s; --rot: 5deg; top: 22.4%; right: 42.6%; width: 9px; height: 9px; background: var(--menta); }
-.confeti i:nth-child(15) { --d: 0.17s; --t: 9.4s; --rot: 15deg; top: 29.1%; left: 29.5%; width: 18px; height: 18px; background: var(--cielo); }
-.confeti i:nth-child(16) { --d: 0.18s; --t: 8.8s; --rot: -20deg; top: 24.3%; right: 40.0%; width: 8px; height: 22px; background: var(--rosa); }
-.confeti i:nth-child(17) { --d: 0.19s; --t: 8.6s; --rot: -3deg; top: 24.6%; left: 22.7%; width: 13px; height: 13px; background: var(--uva); }
-.confeti i:nth-child(18) { --d: 0.2s; --t: 8.4s; --rot: 23deg; top: 33.1%; right: 18.5%; width: 18px; height: 18px; background: var(--naranja); }
-.confeti i:nth-child(19) { --d: 0.21s; --t: 12.3s; --rot: 1deg; top: 28.3%; left: 18.7%; width: 7px; height: 24px; background: var(--ambar); }
-.confeti i:nth-child(20) { --d: 0.21s; --t: 12.8s; --rot: -15deg; top: 37.0%; right: 32.1%; width: 16px; height: 16px; background: var(--menta); }
-.confeti i:nth-child(21) { --d: 0.22s; --t: 8.1s; --rot: -11deg; top: 30.2%; left: 4.7%; width: 12px; height: 12px; background: var(--cielo); }
-.confeti i:nth-child(22) { --d: 0.23s; --t: 11.0s; --rot: 6deg; top: 30.4%; right: 12.6%; width: 8px; height: 22px; background: var(--rosa); }
-.confeti i:nth-child(23) { --d: 0.24s; --t: 10.3s; --rot: 16deg; top: 38.8%; left: 42.9%; width: 8px; height: 8px; background: var(--uva); }
-.confeti i:nth-child(24) { --d: 0.25s; --t: 11.2s; --rot: -27deg; top: 37.4%; right: 18.5%; width: 18px; height: 18px; background: var(--naranja); }
-.confeti i:nth-child(25) { --d: 0.26s; --t: 8.8s; --rot: 9deg; top: 44.9%; left: 9.4%; width: 18px; height: 18px; background: var(--ambar); }
-.confeti i:nth-child(26) { --d: 0.27s; --t: 10.7s; --rot: 12deg; top: 37.7%; right: 27.4%; width: 9px; height: 20px; background: var(--menta); }
-.confeti i:nth-child(27) { --d: 0.27s; --t: 11.1s; --rot: -15deg; top: 38.9%; left: 28.0%; width: 12px; height: 12px; background: var(--cielo); }
-.confeti i:nth-child(28) { --d: 0.28s; --t: 10.4s; --rot: -20deg; top: 49.4%; right: 28.9%; width: 14px; height: 14px; background: var(--rosa); }
-.confeti i:nth-child(29) { --d: 0.29s; --t: 10.4s; --rot: -24deg; top: 51.3%; left: 38.4%; width: 8px; height: 24px; background: var(--uva); }
-.confeti i:nth-child(30) { --d: 0.3s; --t: 10.4s; --rot: -14deg; top: 50.5%; right: 7.3%; width: 13px; height: 13px; background: var(--naranja); }
-.confeti i:nth-child(31) { --d: 0.31s; --t: 8.7s; --rot: -31deg; top: 46.6%; left: 23.7%; width: 14px; height: 14px; background: var(--ambar); }
-.confeti i:nth-child(32) { --d: 0.32s; --t: 11.5s; --rot: -1deg; top: 49.2%; right: 34.4%; width: 9px; height: 18px; background: var(--menta); }
-.confeti i:nth-child(33) { --d: 0.33s; --t: 11.9s; --rot: 34deg; top: 56.8%; left: 23.8%; width: 14px; height: 14px; background: var(--cielo); }
-.confeti i:nth-child(34) { --d: 0.33s; --t: 11.1s; --rot: -10deg; top: 54.4%; right: 24.8%; width: 12px; height: 12px; background: var(--rosa); }
-.confeti i:nth-child(35) { --d: 0.34s; --t: 9.0s; --rot: 29deg; top: 59.1%; left: 36.5%; width: 12px; height: 12px; background: var(--uva); }
-.confeti i:nth-child(36) { --d: 0.35s; --t: 10.4s; --rot: -10deg; top: 52.8%; right: 16.6%; width: 7px; height: 22px; background: var(--naranja); }
-.confeti i:nth-child(37) { --d: 0.36s; --t: 12.0s; --rot: 10deg; top: 63.7%; left: 31.5%; width: 18px; height: 18px; background: var(--ambar); }
-.confeti i:nth-child(38) { --d: 0.37s; --t: 8.5s; --rot: 26deg; top: 59.3%; right: 43.0%; width: 12px; height: 12px; background: var(--menta); }
-.confeti i:nth-child(39) { --d: 0.38s; --t: 10.4s; --rot: 10deg; top: 59.3%; left: 9.7%; width: 9px; height: 18px; background: var(--cielo); }
-.confeti i:nth-child(40) { --d: 0.39s; --t: 12.5s; --rot: -9deg; top: 59.7%; right: 36.2%; width: 9px; height: 9px; background: var(--rosa); }
-.confeti i:nth-child(41) { --d: 0.39s; --t: 8.4s; --rot: 16deg; top: 62.2%; left: 22.0%; width: 14px; height: 14px; background: var(--uva); }
-.confeti i:nth-child(42) { --d: 0.4s; --t: 8.9s; --rot: -18deg; top: 69.5%; right: 21.4%; width: 7px; height: 20px; background: var(--naranja); }
-.confeti i:nth-child(43) { --d: 0.41s; --t: 12.0s; --rot: -16deg; top: 69.5%; left: 2.2%; width: 18px; height: 18px; background: var(--ambar); }
-.confeti i:nth-child(44) { --d: 0.42s; --t: 11.3s; --rot: 10deg; top: 71.2%; right: 27.9%; width: 18px; height: 18px; background: var(--menta); }
-.confeti i:nth-child(45) { --d: 0.43s; --t: 8.1s; --rot: -21deg; top: 72.3%; left: 7.9%; width: 8px; height: 8px; background: var(--cielo); }
-.confeti i:nth-child(46) { --d: 0.44s; --t: 12.1s; --rot: -7deg; top: 77.7%; right: 24.2%; width: 8px; height: 20px; background: var(--rosa); }
-.confeti i:nth-child(47) { --d: 0.45s; --t: 11.8s; --rot: 7deg; top: 72.1%; left: 2.2%; width: 12px; height: 12px; background: var(--uva); }
-.confeti i:nth-child(48) { --d: 0.46s; --t: 8.3s; --rot: 11deg; top: 75.7%; right: 12.4%; width: 10px; height: 10px; background: var(--naranja); }
-.confeti i:nth-child(49) { --d: 0.46s; --t: 12.1s; --rot: 30deg; top: 79.8%; left: 40.5%; width: 9px; height: 24px; background: var(--ambar); }
-.confeti i:nth-child(50) { --d: 0.47s; --t: 12.4s; --rot: -11deg; top: 76.2%; right: 6.8%; width: 8px; height: 8px; background: var(--menta); }
-.confeti i:nth-child(51) { --d: 0.48s; --t: 8.9s; --rot: 26deg; top: 84.1%; left: 27.8%; width: 10px; height: 10px; background: var(--cielo); }
-.confeti i:nth-child(52) { --d: 0.49s; --t: 11.4s; --rot: 33deg; top: 79.1%; right: 28.2%; width: 7px; height: 22px; background: var(--rosa); }
-.confeti i:nth-child(53) { --d: 0.5s; --t: 12.4s; --rot: -27deg; top: 87.3%; left: 25.4%; width: 9px; height: 9px; background: var(--uva); }
-.confeti i:nth-child(54) { --d: 0.51s; --t: 10.5s; --rot: -31deg; top: 83.8%; right: 11.9%; width: 9px; height: 9px; background: var(--naranja); }
-.confeti i:nth-child(55) { --d: 0.52s; --t: 9.6s; --rot: 30deg; top: 91.8%; left: 34.4%; width: 18px; height: 18px; background: var(--ambar); }
-.confeti i:nth-child(56) { --d: 0.52s; --t: 10.5s; --rot: 27deg; top: 86.2%; right: 27.7%; width: 8px; height: 24px; background: var(--menta); }
-.confeti i:nth-child(57) { --d: 0.53s; --t: 12.6s; --rot: -9deg; top: 88.3%; left: 23.3%; width: 13px; height: 13px; background: var(--cielo); }
-.confeti i:nth-child(58) { --d: 0.54s; --t: 10.0s; --rot: 6deg; top: 88.8%; right: 38.0%; width: 9px; height: 9px; background: var(--rosa); }
+.confeti i:nth-child(1) { --d: 0.04s; --t: 8.1s; --rot: 1deg; top: 0.99%; left: 44.4%; width: 7px; height: 7px; background: var(--ambar); }
+.confeti i:nth-child(2) { --d: 0.04s; --t: 13.1s; --rot: -4deg; top: 0.45%; right: 20.5%; width: 8px; height: 8px; background: var(--menta); }
+.confeti i:nth-child(3) { --d: 0.04s; --t: 8.7s; --rot: 25deg; top: 0.3%; left: 21.5%; width: 8px; height: 14px; background: var(--cielo); }
+.confeti i:nth-child(4) { --d: 0.05s; --t: 10.5s; --rot: -31deg; top: 1.17%; right: 20.4%; width: 13px; height: 13px; background: var(--rosa); }
+.confeti i:nth-child(5) { --d: 0.05s; --t: 12.6s; --rot: -11deg; top: 0.5%; left: 10.1%; width: 11px; height: 11px; background: var(--uva); }
+.confeti i:nth-child(6) { --d: 0.05s; --t: 14.8s; --rot: -2deg; top: 1.6%; right: 46.6%; width: 11px; height: 11px; background: var(--naranja); }
+.confeti i:nth-child(7) { --d: 0.05s; --t: 9.2s; --rot: 23deg; top: 1.88%; left: 31.8%; width: 5px; height: 20px; background: var(--ambar); }
+.confeti i:nth-child(8) { --d: 0.06s; --t: 9.3s; --rot: -16deg; top: 2.55%; right: 28.5%; width: 8px; height: 8px; background: var(--menta); }
+.confeti i:nth-child(9) { --d: 0.06s; --t: 9.4s; --rot: -24deg; top: 3.43%; left: 25.8%; width: 17px; height: 17px; background: var(--cielo); }
+.confeti i:nth-child(10) { --d: 0.06s; --t: 14.6s; --rot: -3deg; top: 3.26%; right: 4.2%; width: 10px; height: 10px; background: var(--rosa); }
+.confeti i:nth-child(11) { --d: 0.06s; --t: 14.3s; --rot: 31deg; top: 3.44%; left: 39.4%; width: 11px; height: 11px; background: var(--uva); }
+.confeti i:nth-child(12) { --d: 0.07s; --t: 9.0s; --rot: -23deg; top: 4.8%; right: 14.8%; width: 6px; height: 18px; background: var(--naranja); }
+.confeti i:nth-child(13) { --d: 0.07s; --t: 10.3s; --rot: -20deg; top: 5.29%; left: 34.0%; width: 9px; height: 9px; background: var(--ambar); }
+.confeti i:nth-child(14) { --d: 0.07s; --t: 9.2s; --rot: -34deg; top: 5.15%; right: 44.1%; width: 13px; height: 13px; background: var(--menta); }
+.confeti i:nth-child(15) { --d: 0.07s; --t: 9.1s; --rot: -10deg; top: 5.15%; left: 3.0%; width: 6px; height: 6px; background: var(--cielo); }
+.confeti i:nth-child(16) { --d: 0.08s; --t: 14.6s; --rot: 18deg; top: 6.75%; right: 33.1%; width: 5px; height: 22px; background: var(--rosa); }
+.confeti i:nth-child(17) { --d: 0.08s; --t: 11.4s; --rot: -34deg; top: 5.75%; left: 36.0%; width: 13px; height: 13px; background: var(--uva); }
+.confeti i:nth-child(18) { --d: 0.08s; --t: 13.3s; --rot: 20deg; top: 6.4%; right: 3.9%; width: 9px; height: 9px; background: var(--naranja); }
+.confeti i:nth-child(19) { --d: 0.08s; --t: 11.9s; --rot: -17deg; top: 6.23%; left: 45.6%; width: 7px; height: 7px; background: var(--ambar); }
+.confeti i:nth-child(20) { --d: 0.09s; --t: 9.8s; --rot: 15deg; top: 7.36%; right: 33.2%; width: 9px; height: 9px; background: var(--menta); }
+.confeti i:nth-child(21) { --d: 0.09s; --t: 13.7s; --rot: 14deg; top: 6.54%; left: 8.2%; width: 7px; height: 20px; background: var(--cielo); }
+.confeti i:nth-child(22) { --d: 0.09s; --t: 11.8s; --rot: 16deg; top: 9.01%; right: 3.6%; width: 9px; height: 9px; background: var(--rosa); }
+.confeti i:nth-child(23) { --d: 0.09s; --t: 12.3s; --rot: -32deg; top: 8.97%; left: 19.8%; width: 17px; height: 17px; background: var(--uva); }
+.confeti i:nth-child(24) { --d: 0.09s; --t: 10.3s; --rot: 33deg; top: 7.9%; right: 39.7%; width: 8px; height: 8px; background: var(--naranja); }
+.confeti i:nth-child(25) { --d: 0.1s; --t: 10.4s; --rot: 31deg; top: 8.99%; left: 35.1%; width: 6px; height: 14px; background: var(--ambar); }
+.confeti i:nth-child(26) { --d: 0.1s; --t: 13.6s; --rot: -4deg; top: 10.37%; right: 5.7%; width: 15px; height: 15px; background: var(--menta); }
+.confeti i:nth-child(27) { --d: 0.1s; --t: 13.2s; --rot: 13deg; top: 9.63%; left: 0.5%; width: 8px; height: 8px; background: var(--cielo); }
+.confeti i:nth-child(28) { --d: 0.1s; --t: 12.6s; --rot: 16deg; top: 10.68%; right: 10.0%; width: 8px; height: 8px; background: var(--rosa); }
+.confeti i:nth-child(29) { --d: 0.11s; --t: 11.4s; --rot: 31deg; top: 10.49%; left: 45.8%; width: 10px; height: 10px; background: var(--uva); }
+.confeti i:nth-child(30) { --d: 0.11s; --t: 14.3s; --rot: -27deg; top: 10.33%; right: 34.7%; width: 7px; height: 18px; background: var(--naranja); }
+.confeti i:nth-child(31) { --d: 0.11s; --t: 10.6s; --rot: -36deg; top: 10.46%; left: 11.1%; width: 15px; height: 15px; background: var(--ambar); }
+.confeti i:nth-child(32) { --d: 0.11s; --t: 12.8s; --rot: 14deg; top: 12.04%; right: 32.4%; width: 10px; height: 10px; background: var(--menta); }
+.confeti i:nth-child(33) { --d: 0.12s; --t: 9.1s; --rot: -33deg; top: 11.75%; left: 17.0%; width: 11px; height: 11px; background: var(--cielo); }
+.confeti i:nth-child(34) { --d: 0.12s; --t: 14.2s; --rot: 30deg; top: 13.26%; right: 20.3%; width: 8px; height: 22px; background: var(--rosa); }
+.confeti i:nth-child(35) { --d: 0.12s; --t: 14.3s; --rot: -20deg; top: 12.04%; left: 13.6%; width: 9px; height: 9px; background: var(--uva); }
+.confeti i:nth-child(36) { --d: 0.12s; --t: 14.9s; --rot: -3deg; top: 12.47%; right: 24.3%; width: 15px; height: 15px; background: var(--naranja); }
+.confeti i:nth-child(37) { --d: 0.13s; --t: 9.8s; --rot: -24deg; top: 13.58%; left: 27.3%; width: 6px; height: 6px; background: var(--ambar); }
+.confeti i:nth-child(38) { --d: 0.13s; --t: 8.3s; --rot: -28deg; top: 15.15%; right: 12.1%; width: 15px; height: 15px; background: var(--menta); }
+.confeti i:nth-child(39) { --d: 0.13s; --t: 13.9s; --rot: -27deg; top: 14.17%; left: 13.4%; width: 6px; height: 22px; background: var(--cielo); }
+.confeti i:nth-child(40) { --d: 0.13s; --t: 10.1s; --rot: -28deg; top: 14.87%; right: 8.9%; width: 11px; height: 11px; background: var(--rosa); }
+.confeti i:nth-child(41) { --d: 0.14s; --t: 8.3s; --rot: -23deg; top: 15.66%; left: 30.1%; width: 8px; height: 8px; background: var(--uva); }
+.confeti i:nth-child(42) { --d: 0.14s; --t: 9.0s; --rot: -21deg; top: 14.91%; right: 43.8%; width: 6px; height: 6px; background: var(--naranja); }
+.confeti i:nth-child(43) { --d: 0.14s; --t: 13.6s; --rot: -32deg; top: 15.54%; left: 44.8%; width: 7px; height: 22px; background: var(--ambar); }
+.confeti i:nth-child(44) { --d: 0.14s; --t: 10.3s; --rot: -21deg; top: 16.6%; right: 39.5%; width: 7px; height: 7px; background: var(--menta); }
+.confeti i:nth-child(45) { --d: 0.14s; --t: 9.4s; --rot: 16deg; top: 16.01%; left: 17.0%; width: 9px; height: 9px; background: var(--cielo); }
+.confeti i:nth-child(46) { --d: 0.15s; --t: 11.7s; --rot: 17deg; top: 17.7%; right: 47.6%; width: 9px; height: 9px; background: var(--rosa); }
+.confeti i:nth-child(47) { --d: 0.15s; --t: 13.2s; --rot: 1deg; top: 17.59%; left: 31.9%; width: 9px; height: 9px; background: var(--uva); }
+.confeti i:nth-child(48) { --d: 0.15s; --t: 10.7s; --rot: 1deg; top: 18.25%; right: 22.1%; width: 6px; height: 18px; background: var(--naranja); }
+.confeti i:nth-child(49) { --d: 0.15s; --t: 10.5s; --rot: -12deg; top: 17.26%; left: 39.9%; width: 13px; height: 13px; background: var(--ambar); }
+.confeti i:nth-child(50) { --d: 0.16s; --t: 10.2s; --rot: 16deg; top: 18.73%; right: 36.5%; width: 9px; height: 9px; background: var(--menta); }
+.confeti i:nth-child(51) { --d: 0.16s; --t: 11.3s; --rot: -18deg; top: 18.63%; left: 3.1%; width: 13px; height: 13px; background: var(--cielo); }
+.confeti i:nth-child(52) { --d: 0.16s; --t: 8.2s; --rot: -1deg; top: 19.23%; right: 28.4%; width: 6px; height: 18px; background: var(--rosa); }
+.confeti i:nth-child(53) { --d: 0.16s; --t: 12.0s; --rot: -36deg; top: 19.08%; left: 21.5%; width: 11px; height: 11px; background: var(--uva); }
+.confeti i:nth-child(54) { --d: 0.17s; --t: 13.7s; --rot: -15deg; top: 20.45%; right: 25.9%; width: 13px; height: 13px; background: var(--naranja); }
+.confeti i:nth-child(55) { --d: 0.17s; --t: 14.9s; --rot: 20deg; top: 21.62%; left: 44.1%; width: 13px; height: 13px; background: var(--ambar); }
+.confeti i:nth-child(56) { --d: 0.17s; --t: 9.8s; --rot: -34deg; top: 20.7%; right: 40.4%; width: 13px; height: 13px; background: var(--menta); }
+.confeti i:nth-child(57) { --d: 0.17s; --t: 9.0s; --rot: -30deg; top: 20.99%; left: 20.4%; width: 7px; height: 16px; background: var(--cielo); }
+.confeti i:nth-child(58) { --d: 0.18s; --t: 11.8s; --rot: -23deg; top: 22.39%; right: 36.1%; width: 15px; height: 15px; background: var(--rosa); }
+.confeti i:nth-child(59) { --d: 0.18s; --t: 14.9s; --rot: 1deg; top: 21.92%; left: 44.6%; width: 8px; height: 8px; background: var(--uva); }
+.confeti i:nth-child(60) { --d: 0.18s; --t: 12.2s; --rot: 30deg; top: 21.4%; right: 5.9%; width: 17px; height: 17px; background: var(--naranja); }
+.confeti i:nth-child(61) { --d: 0.18s; --t: 12.9s; --rot: 17deg; top: 23.62%; left: 31.1%; width: 7px; height: 18px; background: var(--ambar); }
+.confeti i:nth-child(62) { --d: 0.19s; --t: 10.1s; --rot: -36deg; top: 23.33%; right: 23.8%; width: 17px; height: 17px; background: var(--menta); }
+.confeti i:nth-child(63) { --d: 0.19s; --t: 9.1s; --rot: -21deg; top: 23.98%; left: 10.8%; width: 17px; height: 17px; background: var(--cielo); }
+.confeti i:nth-child(64) { --d: 0.19s; --t: 14.8s; --rot: -24deg; top: 23.14%; right: 32.1%; width: 10px; height: 10px; background: var(--rosa); }
+.confeti i:nth-child(65) { --d: 0.19s; --t: 14.7s; --rot: -34deg; top: 24.55%; left: 45.9%; width: 7px; height: 7px; background: var(--uva); }
+.confeti i:nth-child(66) { --d: 0.2s; --t: 9.9s; --rot: 31deg; top: 25.76%; right: 34.6%; width: 5px; height: 22px; background: var(--naranja); }
+.confeti i:nth-child(67) { --d: 0.2s; --t: 14.1s; --rot: -13deg; top: 26.21%; left: 27.6%; width: 6px; height: 6px; background: var(--ambar); }
+.confeti i:nth-child(68) { --d: 0.2s; --t: 12.6s; --rot: -22deg; top: 25.86%; right: 44.2%; width: 7px; height: 7px; background: var(--menta); }
+.confeti i:nth-child(69) { --d: 0.2s; --t: 13.2s; --rot: -20deg; top: 25.27%; left: 8.7%; width: 6px; height: 6px; background: var(--cielo); }
+.confeti i:nth-child(70) { --d: 0.2s; --t: 12.0s; --rot: 35deg; top: 27.21%; right: 12.7%; width: 8px; height: 14px; background: var(--rosa); }
+.confeti i:nth-child(71) { --d: 0.21s; --t: 9.0s; --rot: -37deg; top: 25.65%; left: 20.4%; width: 6px; height: 6px; background: var(--uva); }
+.confeti i:nth-child(72) { --d: 0.21s; --t: 11.9s; --rot: 15deg; top: 27.22%; right: 17.2%; width: 17px; height: 17px; background: var(--naranja); }
+.confeti i:nth-child(73) { --d: 0.21s; --t: 10.3s; --rot: -34deg; top: 27.41%; left: 0.7%; width: 15px; height: 15px; background: var(--ambar); }
+.confeti i:nth-child(74) { --d: 0.21s; --t: 9.0s; --rot: -21deg; top: 27.15%; right: 40.0%; width: 7px; height: 7px; background: var(--menta); }
+.confeti i:nth-child(75) { --d: 0.22s; --t: 13.9s; --rot: 26deg; top: 28.55%; left: 39.4%; width: 5px; height: 22px; background: var(--cielo); }
+.confeti i:nth-child(76) { --d: 0.22s; --t: 12.5s; --rot: 38deg; top: 27.83%; right: 9.7%; width: 17px; height: 17px; background: var(--rosa); }
+.confeti i:nth-child(77) { --d: 0.22s; --t: 9.9s; --rot: 38deg; top: 29.6%; left: 44.8%; width: 7px; height: 7px; background: var(--uva); }
+.confeti i:nth-child(78) { --d: 0.22s; --t: 8.8s; --rot: 17deg; top: 29.5%; right: 5.0%; width: 8px; height: 8px; background: var(--naranja); }
+.confeti i:nth-child(79) { --d: 0.23s; --t: 13.4s; --rot: -26deg; top: 29.05%; left: 17.4%; width: 8px; height: 18px; background: var(--ambar); }
+.confeti i:nth-child(80) { --d: 0.23s; --t: 11.2s; --rot: -18deg; top: 29.31%; right: 34.2%; width: 13px; height: 13px; background: var(--menta); }
+.confeti i:nth-child(81) { --d: 0.23s; --t: 8.3s; --rot: 37deg; top: 31.11%; left: 26.9%; width: 11px; height: 11px; background: var(--cielo); }
+.confeti i:nth-child(82) { --d: 0.23s; --t: 13.2s; --rot: -19deg; top: 29.95%; right: 46.7%; width: 8px; height: 8px; background: var(--rosa); }
+.confeti i:nth-child(83) { --d: 0.24s; --t: 13.3s; --rot: 19deg; top: 30.94%; left: 3.7%; width: 6px; height: 6px; background: var(--uva); }
+.confeti i:nth-child(84) { --d: 0.24s; --t: 13.2s; --rot: 21deg; top: 30.86%; right: 39.3%; width: 7px; height: 18px; background: var(--naranja); }
+.confeti i:nth-child(85) { --d: 0.24s; --t: 8.6s; --rot: 16deg; top: 32.37%; left: 34.0%; width: 10px; height: 10px; background: var(--ambar); }
+.confeti i:nth-child(86) { --d: 0.24s; --t: 10.8s; --rot: 10deg; top: 33.0%; right: 43.7%; width: 7px; height: 7px; background: var(--menta); }
+.confeti i:nth-child(87) { --d: 0.25s; --t: 12.0s; --rot: -30deg; top: 33.26%; left: 18.2%; width: 8px; height: 8px; background: var(--cielo); }
+.confeti i:nth-child(88) { --d: 0.25s; --t: 8.7s; --rot: 4deg; top: 33.92%; right: 1.4%; width: 7px; height: 16px; background: var(--rosa); }
+.confeti i:nth-child(89) { --d: 0.25s; --t: 10.9s; --rot: -22deg; top: 33.8%; left: 45.5%; width: 8px; height: 8px; background: var(--uva); }
+.confeti i:nth-child(90) { --d: 0.25s; --t: 10.8s; --rot: -16deg; top: 33.94%; right: 25.6%; width: 17px; height: 17px; background: var(--naranja); }
+.confeti i:nth-child(91) { --d: 0.25s; --t: 13.1s; --rot: -37deg; top: 34.05%; left: 28.9%; width: 11px; height: 11px; background: var(--ambar); }
+.confeti i:nth-child(92) { --d: 0.26s; --t: 8.6s; --rot: 24deg; top: 35.28%; right: 42.8%; width: 17px; height: 17px; background: var(--menta); }
+.confeti i:nth-child(93) { --d: 0.26s; --t: 12.7s; --rot: -28deg; top: 35.51%; left: 23.2%; width: 5px; height: 20px; background: var(--cielo); }
+.confeti i:nth-child(94) { --d: 0.26s; --t: 14.3s; --rot: 8deg; top: 34.57%; right: 13.4%; width: 9px; height: 9px; background: var(--rosa); }
+.confeti i:nth-child(95) { --d: 0.26s; --t: 12.2s; --rot: 29deg; top: 36.64%; left: 20.6%; width: 9px; height: 9px; background: var(--uva); }
+.confeti i:nth-child(96) { --d: 0.27s; --t: 14.8s; --rot: -16deg; top: 35.64%; right: 33.4%; width: 9px; height: 9px; background: var(--naranja); }
+.confeti i:nth-child(97) { --d: 0.27s; --t: 13.1s; --rot: 14deg; top: 37.62%; left: 47.1%; width: 6px; height: 20px; background: var(--ambar); }
+.confeti i:nth-child(98) { --d: 0.27s; --t: 13.9s; --rot: -32deg; top: 37.03%; right: 16.5%; width: 13px; height: 13px; background: var(--menta); }
+.confeti i:nth-child(99) { --d: 0.27s; --t: 8.5s; --rot: -22deg; top: 38.19%; left: 35.9%; width: 7px; height: 7px; background: var(--cielo); }
+.confeti i:nth-child(100) { --d: 0.28s; --t: 10.0s; --rot: -22deg; top: 36.85%; right: 5.8%; width: 13px; height: 13px; background: var(--rosa); }
+.confeti i:nth-child(101) { --d: 0.28s; --t: 10.3s; --rot: 35deg; top: 37.2%; left: 17.2%; width: 11px; height: 11px; background: var(--uva); }
+.confeti i:nth-child(102) { --d: 0.28s; --t: 13.3s; --rot: 38deg; top: 39.14%; right: 41.7%; width: 6px; height: 22px; background: var(--naranja); }
+.confeti i:nth-child(103) { --d: 0.28s; --t: 8.3s; --rot: -18deg; top: 38.36%; left: 35.9%; width: 17px; height: 17px; background: var(--ambar); }
+.confeti i:nth-child(104) { --d: 0.29s; --t: 11.8s; --rot: -33deg; top: 39.97%; right: 35.1%; width: 15px; height: 15px; background: var(--menta); }
+.confeti i:nth-child(105) { --d: 0.29s; --t: 14.4s; --rot: 18deg; top: 38.53%; left: 6.3%; width: 11px; height: 11px; background: var(--cielo); }
+.confeti i:nth-child(106) { --d: 0.29s; --t: 12.9s; --rot: -3deg; top: 40.08%; right: 37.5%; width: 6px; height: 16px; background: var(--rosa); }
+.confeti i:nth-child(107) { --d: 0.29s; --t: 10.2s; --rot: 24deg; top: 40.53%; left: 42.2%; width: 7px; height: 7px; background: var(--uva); }
+.confeti i:nth-child(108) { --d: 0.3s; --t: 9.8s; --rot: 28deg; top: 41.31%; right: 28.3%; width: 10px; height: 10px; background: var(--naranja); }
+.confeti i:nth-child(109) { --d: 0.3s; --t: 10.9s; --rot: -13deg; top: 41.89%; left: 23.2%; width: 13px; height: 13px; background: var(--ambar); }
+.confeti i:nth-child(110) { --d: 0.3s; --t: 14.8s; --rot: 14deg; top: 40.86%; right: 5.8%; width: 13px; height: 13px; background: var(--menta); }
+.confeti i:nth-child(111) { --d: 0.3s; --t: 9.9s; --rot: -10deg; top: 42.4%; left: 6.1%; width: 7px; height: 16px; background: var(--cielo); }
+.confeti i:nth-child(112) { --d: 0.3s; --t: 11.6s; --rot: 15deg; top: 41.18%; right: 10.7%; width: 10px; height: 10px; background: var(--rosa); }
+.confeti i:nth-child(113) { --d: 0.31s; --t: 9.4s; --rot: -33deg; top: 41.94%; left: 4.4%; width: 9px; height: 9px; background: var(--uva); }
+.confeti i:nth-child(114) { --d: 0.31s; --t: 13.0s; --rot: -38deg; top: 43.91%; right: 38.7%; width: 7px; height: 7px; background: var(--naranja); }
+.confeti i:nth-child(115) { --d: 0.31s; --t: 10.9s; --rot: 3deg; top: 42.39%; left: 8.9%; width: 5px; height: 22px; background: var(--ambar); }
+.confeti i:nth-child(116) { --d: 0.31s; --t: 14.2s; --rot: -10deg; top: 44.62%; right: 27.8%; width: 7px; height: 7px; background: var(--menta); }
+.confeti i:nth-child(117) { --d: 0.32s; --t: 8.0s; --rot: -31deg; top: 44.77%; left: 13.2%; width: 8px; height: 8px; background: var(--cielo); }
+.confeti i:nth-child(118) { --d: 0.32s; --t: 14.6s; --rot: -27deg; top: 43.63%; right: 9.5%; width: 9px; height: 9px; background: var(--rosa); }
+.confeti i:nth-child(119) { --d: 0.32s; --t: 11.5s; --rot: 27deg; top: 44.8%; left: 33.4%; width: 10px; height: 10px; background: var(--uva); }
+.confeti i:nth-child(120) { --d: 0.32s; --t: 12.7s; --rot: -38deg; top: 45.97%; right: 34.5%; width: 5px; height: 22px; background: var(--naranja); }
+.confeti i:nth-child(121) { --d: 0.33s; --t: 13.9s; --rot: -38deg; top: 46.4%; left: 15.6%; width: 15px; height: 15px; background: var(--ambar); }
+.confeti i:nth-child(122) { --d: 0.33s; --t: 10.3s; --rot: 28deg; top: 45.51%; right: 27.5%; width: 6px; height: 6px; background: var(--menta); }
+.confeti i:nth-child(123) { --d: 0.33s; --t: 13.9s; --rot: -16deg; top: 46.82%; left: 26.5%; width: 17px; height: 17px; background: var(--cielo); }
+.confeti i:nth-child(124) { --d: 0.33s; --t: 12.5s; --rot: 1deg; top: 45.93%; right: 23.5%; width: 7px; height: 18px; background: var(--rosa); }
+.confeti i:nth-child(125) { --d: 0.34s; --t: 9.7s; --rot: -34deg; top: 47.77%; left: 14.3%; width: 13px; height: 13px; background: var(--uva); }
+.confeti i:nth-child(126) { --d: 0.34s; --t: 12.4s; --rot: 10deg; top: 48.41%; right: 2.9%; width: 13px; height: 13px; background: var(--naranja); }
+.confeti i:nth-child(127) { --d: 0.34s; --t: 12.1s; --rot: 27deg; top: 48.86%; left: 33.3%; width: 9px; height: 9px; background: var(--ambar); }
+.confeti i:nth-child(128) { --d: 0.34s; --t: 11.8s; --rot: 19deg; top: 47.7%; right: 7.9%; width: 7px; height: 7px; background: var(--menta); }
+.confeti i:nth-child(129) { --d: 0.35s; --t: 10.7s; --rot: -26deg; top: 47.75%; left: 27.4%; width: 7px; height: 14px; background: var(--cielo); }
+.confeti i:nth-child(130) { --d: 0.35s; --t: 8.2s; --rot: -16deg; top: 49.93%; right: 25.3%; width: 9px; height: 9px; background: var(--rosa); }
+.confeti i:nth-child(131) { --d: 0.35s; --t: 9.8s; --rot: -17deg; top: 49.24%; left: 25.7%; width: 17px; height: 17px; background: var(--uva); }
+.confeti i:nth-child(132) { --d: 0.35s; --t: 13.5s; --rot: -18deg; top: 49.12%; right: 10.0%; width: 8px; height: 8px; background: var(--naranja); }
+.confeti i:nth-child(133) { --d: 0.35s; --t: 13.5s; --rot: 12deg; top: 49.98%; left: 39.3%; width: 8px; height: 16px; background: var(--ambar); }
+.confeti i:nth-child(134) { --d: 0.36s; --t: 11.0s; --rot: 35deg; top: 49.96%; right: 1.5%; width: 17px; height: 17px; background: var(--menta); }
+.confeti i:nth-child(135) { --d: 0.36s; --t: 14.5s; --rot: -35deg; top: 50.71%; left: 10.7%; width: 15px; height: 15px; background: var(--cielo); }
+.confeti i:nth-child(136) { --d: 0.36s; --t: 9.3s; --rot: 31deg; top: 51.53%; right: 28.0%; width: 15px; height: 15px; background: var(--rosa); }
+.confeti i:nth-child(137) { --d: 0.36s; --t: 11.2s; --rot: -26deg; top: 51.67%; left: 39.1%; width: 17px; height: 17px; background: var(--uva); }
+.confeti i:nth-child(138) { --d: 0.37s; --t: 8.6s; --rot: -9deg; top: 52.48%; right: 22.2%; width: 8px; height: 18px; background: var(--naranja); }
+.confeti i:nth-child(139) { --d: 0.37s; --t: 10.3s; --rot: -14deg; top: 53.56%; left: 41.1%; width: 10px; height: 10px; background: var(--ambar); }
+.confeti i:nth-child(140) { --d: 0.37s; --t: 10.0s; --rot: -7deg; top: 53.08%; right: 1.1%; width: 15px; height: 15px; background: var(--menta); }
+.confeti i:nth-child(141) { --d: 0.37s; --t: 14.7s; --rot: -32deg; top: 52.57%; left: 9.9%; width: 6px; height: 6px; background: var(--cielo); }
+.confeti i:nth-child(142) { --d: 0.38s; --t: 11.9s; --rot: -13deg; top: 53.41%; right: 37.7%; width: 6px; height: 14px; background: var(--rosa); }
+.confeti i:nth-child(143) { --d: 0.38s; --t: 10.2s; --rot: -24deg; top: 53.21%; left: 18.5%; width: 9px; height: 9px; background: var(--uva); }
+.confeti i:nth-child(144) { --d: 0.38s; --t: 14.6s; --rot: -19deg; top: 54.08%; right: 12.2%; width: 9px; height: 9px; background: var(--naranja); }
+.confeti i:nth-child(145) { --d: 0.38s; --t: 10.2s; --rot: 24deg; top: 55.39%; left: 33.7%; width: 7px; height: 7px; background: var(--ambar); }
+.confeti i:nth-child(146) { --d: 0.39s; --t: 11.7s; --rot: -4deg; top: 54.63%; right: 43.7%; width: 13px; height: 13px; background: var(--menta); }
+.confeti i:nth-child(147) { --d: 0.39s; --t: 13.0s; --rot: 12deg; top: 55.82%; left: 24.3%; width: 6px; height: 22px; background: var(--cielo); }
+.confeti i:nth-child(148) { --d: 0.39s; --t: 10.7s; --rot: 22deg; top: 55.77%; right: 28.7%; width: 8px; height: 8px; background: var(--rosa); }
+.confeti i:nth-child(149) { --d: 0.39s; --t: 12.2s; --rot: -27deg; top: 56.77%; left: 6.2%; width: 7px; height: 7px; background: var(--uva); }
+.confeti i:nth-child(150) { --d: 0.4s; --t: 8.1s; --rot: 17deg; top: 57.53%; right: 0.4%; width: 8px; height: 8px; background: var(--naranja); }
+.confeti i:nth-child(151) { --d: 0.4s; --t: 10.2s; --rot: 34deg; top: 57.08%; left: 6.4%; width: 7px; height: 20px; background: var(--ambar); }
+.confeti i:nth-child(152) { --d: 0.4s; --t: 9.8s; --rot: 6deg; top: 57.8%; right: 36.2%; width: 13px; height: 13px; background: var(--menta); }
+.confeti i:nth-child(153) { --d: 0.4s; --t: 12.5s; --rot: 2deg; top: 58.3%; left: 36.6%; width: 8px; height: 8px; background: var(--cielo); }
+.confeti i:nth-child(154) { --d: 0.4s; --t: 9.0s; --rot: 7deg; top: 57.45%; right: 18.7%; width: 13px; height: 13px; background: var(--rosa); }
+.confeti i:nth-child(155) { --d: 0.41s; --t: 12.4s; --rot: -29deg; top: 58.38%; left: 44.1%; width: 13px; height: 13px; background: var(--uva); }
+.confeti i:nth-child(156) { --d: 0.41s; --t: 11.2s; --rot: -28deg; top: 59.48%; right: 46.3%; width: 6px; height: 14px; background: var(--naranja); }
+.confeti i:nth-child(157) { --d: 0.41s; --t: 10.5s; --rot: 35deg; top: 58.35%; left: 11.6%; width: 10px; height: 10px; background: var(--ambar); }
+.confeti i:nth-child(158) { --d: 0.41s; --t: 11.5s; --rot: 15deg; top: 59.3%; right: 11.5%; width: 7px; height: 7px; background: var(--menta); }
+.confeti i:nth-child(159) { --d: 0.42s; --t: 12.7s; --rot: 8deg; top: 60.68%; left: 23.7%; width: 9px; height: 9px; background: var(--cielo); }
+.confeti i:nth-child(160) { --d: 0.42s; --t: 12.8s; --rot: -20deg; top: 59.61%; right: 24.1%; width: 6px; height: 20px; background: var(--rosa); }
+.confeti i:nth-child(161) { --d: 0.42s; --t: 13.3s; --rot: -24deg; top: 60.6%; left: 32.8%; width: 6px; height: 6px; background: var(--uva); }
+.confeti i:nth-child(162) { --d: 0.42s; --t: 13.9s; --rot: 27deg; top: 61.7%; right: 13.0%; width: 6px; height: 6px; background: var(--naranja); }
+.confeti i:nth-child(163) { --d: 0.43s; --t: 14.5s; --rot: 7deg; top: 61.95%; left: 5.9%; width: 9px; height: 9px; background: var(--ambar); }
+.confeti i:nth-child(164) { --d: 0.43s; --t: 14.9s; --rot: 5deg; top: 62.32%; right: 9.7%; width: 11px; height: 11px; background: var(--menta); }
+.confeti i:nth-child(165) { --d: 0.43s; --t: 8.1s; --rot: 1deg; top: 61.83%; left: 6.3%; width: 7px; height: 22px; background: var(--cielo); }
+.confeti i:nth-child(166) { --d: 0.43s; --t: 9.6s; --rot: -36deg; top: 62.69%; right: 18.2%; width: 17px; height: 17px; background: var(--rosa); }
+.confeti i:nth-child(167) { --d: 0.44s; --t: 13.6s; --rot: 30deg; top: 63.24%; left: 31.3%; width: 17px; height: 17px; background: var(--uva); }
+.confeti i:nth-child(168) { --d: 0.44s; --t: 13.8s; --rot: 16deg; top: 63.94%; right: 31.5%; width: 17px; height: 17px; background: var(--naranja); }
+.confeti i:nth-child(169) { --d: 0.44s; --t: 9.5s; --rot: -32deg; top: 64.36%; left: 14.4%; width: 5px; height: 18px; background: var(--ambar); }
+.confeti i:nth-child(170) { --d: 0.44s; --t: 10.6s; --rot: 20deg; top: 64.43%; right: 31.4%; width: 7px; height: 7px; background: var(--menta); }
+.confeti i:nth-child(171) { --d: 0.45s; --t: 11.1s; --rot: -1deg; top: 63.94%; left: 10.2%; width: 8px; height: 8px; background: var(--cielo); }
+.confeti i:nth-child(172) { --d: 0.45s; --t: 8.7s; --rot: 19deg; top: 64.6%; right: 24.3%; width: 6px; height: 6px; background: var(--rosa); }
+.confeti i:nth-child(173) { --d: 0.45s; --t: 10.6s; --rot: -10deg; top: 65.47%; left: 12.8%; width: 11px; height: 11px; background: var(--uva); }
+.confeti i:nth-child(174) { --d: 0.45s; --t: 13.3s; --rot: 32deg; top: 66.63%; right: 39.7%; width: 5px; height: 16px; background: var(--naranja); }
+.confeti i:nth-child(175) { --d: 0.45s; --t: 8.1s; --rot: 17deg; top: 67.13%; left: 19.0%; width: 7px; height: 7px; background: var(--ambar); }
+.confeti i:nth-child(176) { --d: 0.46s; --t: 11.5s; --rot: 2deg; top: 67.36%; right: 19.9%; width: 17px; height: 17px; background: var(--menta); }
+.confeti i:nth-child(177) { --d: 0.46s; --t: 13.0s; --rot: 22deg; top: 67.64%; left: 9.1%; width: 8px; height: 8px; background: var(--cielo); }
+.confeti i:nth-child(178) { --d: 0.46s; --t: 11.4s; --rot: 7deg; top: 66.33%; right: 4.5%; width: 7px; height: 14px; background: var(--rosa); }
+.confeti i:nth-child(179) { --d: 0.46s; --t: 8.0s; --rot: 37deg; top: 66.72%; left: 16.8%; width: 15px; height: 15px; background: var(--uva); }
+.confeti i:nth-child(180) { --d: 0.47s; --t: 8.5s; --rot: -30deg; top: 68.25%; right: 11.3%; width: 11px; height: 11px; background: var(--naranja); }
+.confeti i:nth-child(181) { --d: 0.47s; --t: 12.7s; --rot: -5deg; top: 67.96%; left: 46.6%; width: 9px; height: 9px; background: var(--ambar); }
+.confeti i:nth-child(182) { --d: 0.47s; --t: 8.3s; --rot: -9deg; top: 69.35%; right: 19.4%; width: 15px; height: 15px; background: var(--menta); }
+.confeti i:nth-child(183) { --d: 0.47s; --t: 12.2s; --rot: 1deg; top: 68.43%; left: 45.0%; width: 6px; height: 18px; background: var(--cielo); }
+.confeti i:nth-child(184) { --d: 0.48s; --t: 10.2s; --rot: 19deg; top: 70.45%; right: 16.0%; width: 11px; height: 11px; background: var(--rosa); }
+.confeti i:nth-child(185) { --d: 0.48s; --t: 12.2s; --rot: 35deg; top: 70.75%; left: 1.7%; width: 13px; height: 13px; background: var(--uva); }
+.confeti i:nth-child(186) { --d: 0.48s; --t: 9.8s; --rot: -30deg; top: 69.64%; right: 41.6%; width: 13px; height: 13px; background: var(--naranja); }
+.confeti i:nth-child(187) { --d: 0.48s; --t: 11.0s; --rot: -3deg; top: 70.62%; left: 37.8%; width: 7px; height: 16px; background: var(--ambar); }
+.confeti i:nth-child(188) { --d: 0.49s; --t: 14.7s; --rot: 29deg; top: 71.78%; right: 31.4%; width: 11px; height: 11px; background: var(--menta); }
+.confeti i:nth-child(189) { --d: 0.49s; --t: 9.5s; --rot: -32deg; top: 71.0%; left: 20.0%; width: 6px; height: 6px; background: var(--cielo); }
+.confeti i:nth-child(190) { --d: 0.49s; --t: 13.3s; --rot: -34deg; top: 72.78%; right: 42.5%; width: 15px; height: 15px; background: var(--rosa); }
+.confeti i:nth-child(191) { --d: 0.49s; --t: 8.8s; --rot: -17deg; top: 72.56%; left: 41.3%; width: 15px; height: 15px; background: var(--uva); }
+.confeti i:nth-child(192) { --d: 0.5s; --t: 10.6s; --rot: 35deg; top: 73.67%; right: 1.2%; width: 8px; height: 20px; background: var(--naranja); }
+.confeti i:nth-child(193) { --d: 0.5s; --t: 11.4s; --rot: 3deg; top: 73.29%; left: 22.7%; width: 13px; height: 13px; background: var(--ambar); }
+.confeti i:nth-child(194) { --d: 0.5s; --t: 14.8s; --rot: -5deg; top: 73.62%; right: 15.0%; width: 7px; height: 7px; background: var(--menta); }
+.confeti i:nth-child(195) { --d: 0.5s; --t: 12.5s; --rot: -37deg; top: 73.55%; left: 42.5%; width: 11px; height: 11px; background: var(--cielo); }
+.confeti i:nth-child(196) { --d: 0.51s; --t: 12.2s; --rot: -4deg; top: 73.49%; right: 34.8%; width: 8px; height: 20px; background: var(--rosa); }
+.confeti i:nth-child(197) { --d: 0.51s; --t: 12.2s; --rot: 32deg; top: 74.67%; left: 15.6%; width: 10px; height: 10px; background: var(--uva); }
+.confeti i:nth-child(198) { --d: 0.51s; --t: 9.3s; --rot: -2deg; top: 74.12%; right: 8.1%; width: 13px; height: 13px; background: var(--naranja); }
+.confeti i:nth-child(199) { --d: 0.51s; --t: 12.2s; --rot: 6deg; top: 74.62%; left: 23.3%; width: 11px; height: 11px; background: var(--ambar); }
+.confeti i:nth-child(200) { --d: 0.51s; --t: 14.9s; --rot: 16deg; top: 76.66%; right: 40.6%; width: 17px; height: 17px; background: var(--menta); }
+.confeti i:nth-child(201) { --d: 0.52s; --t: 11.5s; --rot: -33deg; top: 76.67%; left: 19.2%; width: 7px; height: 22px; background: var(--cielo); }
+.confeti i:nth-child(202) { --d: 0.52s; --t: 10.0s; --rot: 19deg; top: 77.08%; right: 6.6%; width: 6px; height: 6px; background: var(--rosa); }
+.confeti i:nth-child(203) { --d: 0.52s; --t: 11.1s; --rot: 29deg; top: 76.17%; left: 45.0%; width: 15px; height: 15px; background: var(--uva); }
+.confeti i:nth-child(204) { --d: 0.52s; --t: 8.4s; --rot: -8deg; top: 76.59%; right: 19.4%; width: 17px; height: 17px; background: var(--naranja); }
+.confeti i:nth-child(205) { --d: 0.53s; --t: 8.1s; --rot: -37deg; top: 78.55%; left: 41.5%; width: 5px; height: 20px; background: var(--ambar); }
+.confeti i:nth-child(206) { --d: 0.53s; --t: 14.9s; --rot: 35deg; top: 78.09%; right: 28.3%; width: 10px; height: 10px; background: var(--menta); }
+.confeti i:nth-child(207) { --d: 0.53s; --t: 11.1s; --rot: -28deg; top: 79.41%; left: 13.0%; width: 15px; height: 15px; background: var(--cielo); }
+.confeti i:nth-child(208) { --d: 0.53s; --t: 14.0s; --rot: -24deg; top: 79.65%; right: 46.5%; width: 7px; height: 7px; background: var(--rosa); }
+.confeti i:nth-child(209) { --d: 0.54s; --t: 11.6s; --rot: 31deg; top: 78.56%; left: 31.4%; width: 8px; height: 8px; background: var(--uva); }
+.confeti i:nth-child(210) { --d: 0.54s; --t: 10.5s; --rot: -18deg; top: 79.78%; right: 44.6%; width: 7px; height: 14px; background: var(--naranja); }
+.confeti i:nth-child(211) { --d: 0.54s; --t: 12.5s; --rot: -36deg; top: 80.21%; left: 35.7%; width: 10px; height: 10px; background: var(--ambar); }
+.confeti i:nth-child(212) { --d: 0.54s; --t: 14.0s; --rot: 5deg; top: 79.49%; right: 23.1%; width: 11px; height: 11px; background: var(--menta); }
+.confeti i:nth-child(213) { --d: 0.55s; --t: 12.6s; --rot: -2deg; top: 81.62%; left: 22.7%; width: 13px; height: 13px; background: var(--cielo); }
+.confeti i:nth-child(214) { --d: 0.55s; --t: 9.0s; --rot: -11deg; top: 80.73%; right: 15.5%; width: 7px; height: 16px; background: var(--rosa); }
+.confeti i:nth-child(215) { --d: 0.55s; --t: 11.0s; --rot: -12deg; top: 80.8%; left: 26.0%; width: 7px; height: 7px; background: var(--uva); }
+.confeti i:nth-child(216) { --d: 0.55s; --t: 11.7s; --rot: 36deg; top: 81.11%; right: 10.5%; width: 9px; height: 9px; background: var(--naranja); }
+.confeti i:nth-child(217) { --d: 0.56s; --t: 10.2s; --rot: -27deg; top: 81.31%; left: 20.4%; width: 8px; height: 8px; background: var(--ambar); }
+.confeti i:nth-child(218) { --d: 0.56s; --t: 10.5s; --rot: 31deg; top: 81.89%; right: 34.0%; width: 13px; height: 13px; background: var(--menta); }
+.confeti i:nth-child(219) { --d: 0.56s; --t: 14.5s; --rot: -16deg; top: 83.45%; left: 0.9%; width: 8px; height: 14px; background: var(--cielo); }
+.confeti i:nth-child(220) { --d: 0.56s; --t: 11.3s; --rot: 20deg; top: 83.23%; right: 31.8%; width: 8px; height: 8px; background: var(--rosa); }
+.confeti i:nth-child(221) { --d: 0.56s; --t: 9.9s; --rot: 18deg; top: 82.84%; left: 36.3%; width: 13px; height: 13px; background: var(--uva); }
+.confeti i:nth-child(222) { --d: 0.57s; --t: 10.8s; --rot: 7deg; top: 84.01%; right: 35.3%; width: 9px; height: 9px; background: var(--naranja); }
+.confeti i:nth-child(223) { --d: 0.57s; --t: 8.0s; --rot: 12deg; top: 83.62%; left: 14.8%; width: 5px; height: 14px; background: var(--ambar); }
+.confeti i:nth-child(224) { --d: 0.57s; --t: 13.0s; --rot: 22deg; top: 85.1%; right: 36.9%; width: 8px; height: 8px; background: var(--menta); }
+.confeti i:nth-child(225) { --d: 0.57s; --t: 13.7s; --rot: 3deg; top: 86.25%; left: 33.0%; width: 10px; height: 10px; background: var(--cielo); }
+.confeti i:nth-child(226) { --d: 0.58s; --t: 8.6s; --rot: 29deg; top: 85.1%; right: 11.8%; width: 17px; height: 17px; background: var(--rosa); }
+.confeti i:nth-child(227) { --d: 0.58s; --t: 12.8s; --rot: 38deg; top: 85.23%; left: 40.7%; width: 10px; height: 10px; background: var(--uva); }
+.confeti i:nth-child(228) { --d: 0.58s; --t: 12.6s; --rot: -16deg; top: 87.02%; right: 22.1%; width: 6px; height: 16px; background: var(--naranja); }
+.confeti i:nth-child(229) { --d: 0.58s; --t: 13.4s; --rot: -25deg; top: 86.74%; left: 10.8%; width: 7px; height: 7px; background: var(--ambar); }
+.confeti i:nth-child(230) { --d: 0.59s; --t: 8.2s; --rot: -21deg; top: 86.53%; right: 0.9%; width: 17px; height: 17px; background: var(--menta); }
+.confeti i:nth-child(231) { --d: 0.59s; --t: 14.3s; --rot: -16deg; top: 88.11%; left: 1.2%; width: 13px; height: 13px; background: var(--cielo); }
+.confeti i:nth-child(232) { --d: 0.59s; --t: 9.5s; --rot: -19deg; top: 88.7%; right: 38.3%; width: 7px; height: 18px; background: var(--rosa); }
+.confeti i:nth-child(233) { --d: 0.59s; --t: 9.9s; --rot: 31deg; top: 88.88%; left: 8.5%; width: 17px; height: 17px; background: var(--uva); }
+.confeti i:nth-child(234) { --d: 0.6s; --t: 12.0s; --rot: 36deg; top: 87.67%; right: 22.9%; width: 9px; height: 9px; background: var(--naranja); }
+.confeti i:nth-child(235) { --d: 0.6s; --t: 11.6s; --rot: 24deg; top: 90.09%; left: 35.1%; width: 15px; height: 15px; background: var(--ambar); }
+.confeti i:nth-child(236) { --d: 0.6s; --t: 12.4s; --rot: 4deg; top: 88.71%; right: 38.4%; width: 13px; height: 13px; background: var(--menta); }
+.confeti i:nth-child(237) { --d: 0.6s; --t: 13.8s; --rot: 12deg; top: 89.48%; left: 25.8%; width: 7px; height: 14px; background: var(--cielo); }
+.confeti i:nth-child(238) { --d: 0.61s; --t: 11.0s; --rot: 15deg; top: 90.82%; right: 43.2%; width: 13px; height: 13px; background: var(--rosa); }
+.confeti i:nth-child(239) { --d: 0.61s; --t: 8.0s; --rot: -26deg; top: 90.09%; left: 11.8%; width: 15px; height: 15px; background: var(--uva); }
+.confeti i:nth-child(240) { --d: 0.61s; --t: 8.1s; --rot: -27deg; top: 91.44%; right: 41.4%; width: 6px; height: 6px; background: var(--naranja); }
+.confeti i:nth-child(241) { --d: 0.61s; --t: 10.4s; --rot: -23deg; top: 92.4%; left: 22.7%; width: 6px; height: 20px; background: var(--ambar); }
+.confeti i:nth-child(242) { --d: 0.61s; --t: 8.0s; --rot: 28deg; top: 91.24%; right: 33.5%; width: 6px; height: 6px; background: var(--menta); }
+.confeti i:nth-child(243) { --d: 0.62s; --t: 9.4s; --rot: -7deg; top: 92.81%; left: 26.2%; width: 17px; height: 17px; background: var(--cielo); }
+.confeti i:nth-child(244) { --d: 0.62s; --t: 13.7s; --rot: -1deg; top: 91.94%; right: 5.2%; width: 6px; height: 6px; background: var(--rosa); }
+.confeti i:nth-child(245) { --d: 0.62s; --t: 11.3s; --rot: -31deg; top: 91.84%; left: 46.2%; width: 17px; height: 17px; background: var(--uva); }
+.confeti i:nth-child(246) { --d: 0.62s; --t: 11.9s; --rot: -30deg; top: 92.56%; right: 25.5%; width: 7px; height: 14px; background: var(--naranja); }
+.confeti i:nth-child(247) { --d: 0.63s; --t: 11.5s; --rot: 13deg; top: 92.66%; left: 5.6%; width: 17px; height: 17px; background: var(--ambar); }
+.confeti i:nth-child(248) { --d: 0.63s; --t: 13.8s; --rot: 35deg; top: 94.28%; right: 47.8%; width: 10px; height: 10px; background: var(--menta); }
+.confeti i:nth-child(249) { --d: 0.63s; --t: 13.8s; --rot: 7deg; top: 94.69%; left: 43.0%; width: 15px; height: 15px; background: var(--cielo); }
+.confeti i:nth-child(250) { --d: 0.63s; --t: 12.1s; --rot: 25deg; top: 93.93%; right: 41.5%; width: 6px; height: 16px; background: var(--rosa); }
+.confeti i:nth-child(251) { --d: 0.64s; --t: 14.3s; --rot: -16deg; top: 95.55%; left: 37.1%; width: 6px; height: 6px; background: var(--uva); }
+.confeti i:nth-child(252) { --d: 0.64s; --t: 12.8s; --rot: 13deg; top: 94.91%; right: 6.3%; width: 9px; height: 9px; background: var(--naranja); }
+.confeti i:nth-child(253) { --d: 0.64s; --t: 11.3s; --rot: 31deg; top: 95.96%; left: 7.2%; width: 10px; height: 10px; background: var(--ambar); }
+.confeti i:nth-child(254) { --d: 0.64s; --t: 14.8s; --rot: 31deg; top: 95.75%; right: 21.1%; width: 10px; height: 10px; background: var(--menta); }
+.confeti i:nth-child(255) { --d: 0.65s; --t: 9.3s; --rot: -7deg; top: 95.74%; left: 24.0%; width: 7px; height: 20px; background: var(--cielo); }
+.confeti i:nth-child(256) { --d: 0.65s; --t: 8.1s; --rot: 21deg; top: 96.74%; right: 6.4%; width: 13px; height: 13px; background: var(--rosa); }
+.confeti i:nth-child(257) { --d: 0.65s; --t: 14.5s; --rot: 26deg; top: 97.11%; left: 46.8%; width: 13px; height: 13px; background: var(--uva); }
+.confeti i:nth-child(258) { --d: 0.65s; --t: 13.0s; --rot: 36deg; top: 96.76%; right: 24.3%; width: 15px; height: 15px; background: var(--naranja); }
+.confeti i:nth-child(259) { --d: 0.66s; --t: 11.2s; --rot: 24deg; top: 98.12%; left: 18.9%; width: 8px; height: 22px; background: var(--ambar); }
+.confeti i:nth-child(260) { --d: 0.66s; --t: 10.2s; --rot: -30deg; top: 98.5%; right: 22.4%; width: 15px; height: 15px; background: var(--menta); }
 
 /* --- Los movimientos --- */
 
@@ -400,23 +615,23 @@ section { padding-block: clamp(40px, 6vw, 72px); }
 }
 @keyframes confeti-entra {
   from { opacity: 0; transform: rotate(var(--rot, 0deg)) scale(0); }
-  to   { opacity: .78; transform: rotate(var(--rot, 0deg)) scale(1); }
+  to   { opacity: var(--op, .45); transform: rotate(var(--rot, 0deg)) scale(1); }
 }
 @keyframes confeti-flota {
-  0%, 100% { opacity: .78; transform: rotate(var(--rot, 0deg)) translateY(0); }
-  50%      { opacity: .5;  transform: rotate(calc(var(--rot, 0deg) + 10deg)) translateY(-16px); }
+  0%, 100% { opacity: var(--op, .45); transform: rotate(var(--rot, 0deg)) translateY(0); }
+  50%      { opacity: calc(var(--op, .45) * .55); transform: rotate(calc(var(--rot, 0deg) + 10deg)) translateY(-16px); }
 }
 
 /* --- Resto del hero --- */
 .eyebrow {
   display: inline-flex; align-items: center; gap: .55rem;
-  background: rgba(255, 255, 255, .9);
-  border: 1px solid #fff; color: var(--muted);
+  background: var(--ambar);
+  border: 1px solid var(--ambar); color: var(--ink);
   font-weight: 700; font-size: .82rem; letter-spacing: .02em;
   padding: .4rem 1rem; border-radius: var(--pill); margin-bottom: var(--s4);
   box-shadow: var(--ring);
 }
-.eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--menta); }
+.eyebrow .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--rosa); }
 .hero .lead { font-size: clamp(1.02rem, 1.6vw, 1.16rem); color: var(--muted); max-width: 54ch; margin-inline: auto; }
 .hero .actions { display: flex; flex-wrap: wrap; gap: var(--s3); margin-top: var(--s4); justify-content: center; }
 .hero-note {
@@ -516,7 +731,21 @@ section { padding-block: clamp(40px, 6vw, 72px); }
 .party .confeti { z-index: 0; }
 /* El confeti de aquí va en blanco: sobre el degradado los colores se pierden.
    El :nth-child(n) es para ganarle en especificidad a las reglas de posición. */
-.party .confeti i:nth-child(n) { background: rgba(255, 255, 255, .55); }
+.party .confeti i:nth-child(n) { background: rgba(255, 255, 255, .6); --op: .8; }
+.party .confeti i:nth-child(1) { top: 3%; left: 37.2%; }
+.party .confeti i:nth-child(2) { top: 9.2%; right: 32.7%; }
+.party .confeti i:nth-child(3) { top: 15.4%; left: 18.2%; }
+.party .confeti i:nth-child(4) { top: 18.1%; right: 4.8%; }
+.party .confeti i:nth-child(5) { top: 21.4%; left: 20.8%; }
+.party .confeti i:nth-child(6) { top: 34.2%; right: 16.2%; }
+.party .confeti i:nth-child(7) { top: 36.7%; left: 27.0%; }
+.party .confeti i:nth-child(8) { top: 47.7%; right: 39.8%; }
+.party .confeti i:nth-child(9) { top: 54.2%; left: 15.5%; }
+.party .confeti i:nth-child(10) { top: 59.5%; right: 24.8%; }
+.party .confeti i:nth-child(11) { top: 70.7%; left: 17.6%; }
+.party .confeti i:nth-child(12) { top: 74.3%; right: 27.7%; }
+.party .confeti i:nth-child(13) { top: 83.7%; left: 32.5%; }
+.party .confeti i:nth-child(14) { top: 86.6%; right: 2.9%; }
 
 .party .kicker { color: rgba(255, 255, 255, .88); }
 .party h2 { color: #fff; margin-bottom: var(--s3); font-size: clamp(1.9rem, 4.6vw, 3rem); }
@@ -556,8 +785,8 @@ section { padding-block: clamp(40px, 6vw, 72px); }
 
 .btn-xl { font-size: 1.18rem; padding: 1.05rem 2.3rem; }
 .party .btn-primary {
-  background: #fff; color: var(--rosa);
-  box-shadow: 0 14px 34px rgba(0, 0, 0, .2);
+  background: var(--cielo); color: var(--ink);
+  box-shadow: 0 14px 34px rgba(0, 0, 0, .25);
   animation: latido 2.8s ease-in-out infinite;
 }
 .party .btn-primary:hover { animation-play-state: paused; }
