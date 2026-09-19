@@ -6,14 +6,12 @@ Salidas: images/favicon.ico (16/32/48), images/apple-touch-icon.png (180),
 images/icon-192.png, images/icon-512.png.
 
 El wordmark completo no sirve de favicon: es una pieza ancha y a 16px se
-vuelve una mancha. El icono es la P inicial en blanco sobre un cuadrado
-redondeado con un degradado en diagonal de los seis colores de la marca.
+vuelve una mancha. El icono es la P inicial —en el mismo ámbar que la P del
+logotipo— sobre un cuadrado redondeado con un degradado en diagonal de la
+paleta de la marca.
 
-El orden de las paradas no es decorativo. Las claras —menta, cielo, ámbar—
-van a las esquinas y las saturadas —uva, rosa, naranja— a la banda central,
-que es justo donde cae la P: sobre esas tres el blanco se lee, sobre ámbar
-no. Y el degradado abre en verde y azul, colores que la paleta de Instagram
-no usa, para que el parecido sea con la técnica y no con su combinación.
+El degradado abre en verde y azul, colores que la paleta de Instagram no usa,
+para que el parecido sea con la técnica y no con su combinación.
 
 La P va en Fredoka, la misma con la que estuvo recreado el logotipo.
 """
@@ -32,9 +30,12 @@ AMBAR, MENTA, NARANJA = (242, 161, 30), (79, 189, 138), (244, 120, 58)
 ROSA, CIELO, UVA = (232, 67, 127), (90, 174, 228), (139, 111, 212)
 BLANCO = (255, 255, 255)
 
-# Paradas del degradado, de una esquina a la otra. Claras afuera, saturadas
-# en el centro: ahí es donde se apoya la P.
-PARADAS = [(0.0, MENTA), (0.30, CIELO), (0.55, UVA), (0.74, ROSA), (0.90, NARANJA), (1.0, AMBAR)]
+# Paradas del degradado, de una esquina a la otra. Son versiones PROFUNDAS de
+# menta, cielo, uva y rosa: la P va en el ámbar del logotipo, y sobre los tonos
+# claros de la paleta ese ámbar se apaga —la parte baja de la letra se funde
+# con el naranja—. Con el centro hundido, la P despega y se lee a 16px.
+PARADAS = [(0.0, (46, 150, 110)), (0.30, (40, 110, 170)), (0.55, (86, 58, 150)),
+           (0.74, (178, 32, 92)), (0.90, NARANJA), (1.0, AMBAR)]
 
 LADO = 512  # se dibuja grande una vez y se reduce, para que no se vea sucio
 
@@ -71,7 +72,7 @@ def base():
     f = ImageFont.truetype(str(FUENTE_TTF), round(LADO * .68))
     izq, arriba, der, abajo = d.textbbox((0, 0), 'P', font=f)
     d.text(((LADO - (der - izq)) / 2 - izq, (LADO - (abajo - arriba)) / 2 - arriba),
-           'P', font=f, fill=(*BLANCO, 255))
+           'P', font=f, fill=(*AMBAR, 255))
     return icono
 
 
@@ -83,7 +84,7 @@ def main():
         # El de Apple no admite transparencia: se aplana sobre el propio rosa.
         img = icono.resize((lado, lado), Image.LANCZOS)
         if nombre.startswith('apple'):
-            fondo = Image.new('RGB', (lado, lado), UVA)
+            fondo = Image.new('RGB', (lado, lado), (86, 58, 150))
             fondo.paste(img, (0, 0), img)
             img = fondo
         img.save(IMAGENES / nombre)

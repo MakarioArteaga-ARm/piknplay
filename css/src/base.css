@@ -1213,6 +1213,20 @@ main > section { position: relative; z-index: 1; }
 .fab:hover { transform: scale(1.07); }
 .fab svg { width: 29px; height: 29px; fill: currentColor; }
 
+/* Las pastillas que NO son botones.
+   Tienen forma de botón, así que el cursor de texto y la selección al pasar
+   por encima las hacen sentir rotas: el visitante lee "aquí se hace clic" y
+   lo que obtiene es una barra de selección. Se comportan como lo que son,
+   etiquetas: cursor normal y sin selección. No afecta al lector de pantalla,
+   que las sigue leyendo igual. */
+.eyebrow,
+.party-lista li,
+.sticker {
+  cursor: default;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
 /* ---------- Aparición al scroll ---------- */
 /* CONTRATO DE SEGURIDAD: el ocultamiento vive SOLO bajo .js-reveal, clase que
    el guard del <head> añade únicamente si hay IntersectionObserver y el
