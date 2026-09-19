@@ -33,9 +33,9 @@ functions/_middleware   Cierra los archivos internos en el despliegue
 
 ## Despliegue
 
-**https://piknplay-web.pages.dev**
+**https://piknplay.pages.dev**
 
-Cloudflare Pages, proyecto `piknplay-web`, conectado a este repositorio: cada
+Cloudflare Pages, proyecto `piknplay`, conectado a este repositorio: cada
 push a `main` dispara un despliegue automático. **Sin paso de compilación**: el
 despliegue publica lo que está commiteado.
 
