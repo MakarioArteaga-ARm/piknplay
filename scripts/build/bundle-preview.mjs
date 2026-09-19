@@ -36,13 +36,24 @@ const estilos = [
   `@media (min-width: 901px) {\n${escritorio}\n}`,
 ].join('\n\n');
 
+// Los scripts también viajan embebidos: el guard en línea del <head> y el
+// contenido de cada <script src>. Sin ellos el preview se vería sin la
+// aparición al scroll, que es justo lo que se quiere revisar.
+const guard = (html.match(/<script>([\s\S]*?)<\/script>/) || [, ''])[1];
+const fuentesJs = [...html.matchAll(/<script src="([^"]+)"[^>]*><\/script>/g)].map((m) => m[1]);
+const js = (await Promise.all(fuentesJs.map((ruta) => leer(ruta)))).join('\n');
+
 const salida = `<title>${TITULO}</title>
 ${FUENTES}
 
 <style>
 ${estilos}
 </style>
-${cuerpo[1]}`;
+${cuerpo[1]}
+<script>${guard}</script>
+<script type="module">
+${js}
+</script>`;
 
 await fs.writeFile(out, salida, 'utf8');
 console.log(`${out} — ${(salida.length / 1024).toFixed(0)} KB`);

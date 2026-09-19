@@ -7,7 +7,7 @@
   # style-src y font-src admiten Google Fonts porque Baloo 2, Fredoka y Nunito
   # todavía se cargan por CDN. Cuando se autoalojen en /fonts, las dos
   # directivas vuelven a 'self' y este comentario se borra.
-  Content-Security-Policy: default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; form-action 'self'; object-src 'none'; base-uri 'self';
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'sha256-fPTrGAQ6OkK/nSnncsfZ9HguG05vMs7/XS//anBHUXg='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'self'; form-action 'self'; object-src 'none'; base-uri 'self';
   Cache-Control: public, max-age=0, must-revalidate
 
 /css/*

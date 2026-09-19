@@ -29,6 +29,10 @@
 
   <!-- Hoja base + dos condicionales por media query, igual que armlaboral.com.
        El ?v= lo reescribe el build a partir del hash del contenido. -->
+
+  <script>/* Guard de aparición al scroll — ver .js-reveal en css/src/base.css */
+(function(){var d=document.documentElement;if(!("IntersectionObserver" in window))return;try{if(window.matchMedia&&window.matchMedia("(prefers-reduced-motion: reduce)").matches)return}catch(e){return}d.classList.add("js-reveal");setTimeout(function(){if(!d.dataset.revealReady){d.classList.remove("js-reveal")}},2500)})();</script>
+  <script src="script/reveal.js" defer></script>
   <link rel="preload" href="css/base.css?v=dev" as="style" />
   <link rel="stylesheet" href="css/base.css?v=dev" />
   <link rel="stylesheet" href="css/mobile.css?v=dev" media="(max-width: 900px)" />
@@ -137,7 +141,7 @@
         No somos guardería ni servicio de cuidado de menores: tú los acompañas en la diversión.
       </p>
 
-      <div class="facts">
+      <div class="facts animate-on-scroll">
         <article class="fact f-ambar">
           <span class="chip" aria-hidden="true">⏱️</span>
           <strong>Tú eliges cuánto tiempo</strong>
@@ -163,7 +167,7 @@
   </section>
 
   <section id="como-funciona">
-    <div class="container panel">
+    <div class="container panel animate-on-scroll">
       <div class="section-head">
         <span class="kicker k-cielo">Primera visita</span>
         <h2>Tu primera vez, <span class="swash" style="--swash: rgba(90,174,228,.4)">en tres pasos</span></h2>
@@ -190,7 +194,7 @@
   </section>
 
   <section id="areas">
-    <div class="container panel">
+    <div class="container panel animate-on-scroll">
       <div class="section-head">
         <span class="kicker k-menta">El espacio</span>
         <h2>Las áreas están hechas <span class="swash" style="--swash: rgba(79,189,138,.4)">por tamaño</span></h2>
@@ -214,7 +218,7 @@
   </section>
 
   <section id="antes">
-    <div class="container panel">
+    <div class="container panel animate-on-scroll">
       <div class="grid-2">
         <div>
           <span class="kicker k-rosa">Antes de venir</span>
@@ -241,7 +245,7 @@
 
   <section id="fiestas">
     <div class="container">
-      <div class="party">
+      <div class="party animate-on-scroll">
         <div class="confeti" aria-hidden="true">
           <i></i><i class="barra"></i><i></i><i></i><i></i><i class="barra"></i><i></i>
           <i></i><i></i><i></i><i class="barra"></i><i></i><i></i><i></i>

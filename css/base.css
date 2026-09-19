@@ -1118,7 +1118,6 @@ main > section { position: relative; z-index: 1; }
   border-radius: var(--pill);
   box-shadow: 0 10px 24px rgba(0, 0, 0, .18);
   transform: rotate(7deg);
-  animation: sticker-late 3.2s ease-in-out infinite;
 }
 
 /* Lo que incluye, en pastillas. */
@@ -1138,21 +1137,11 @@ main > section { position: relative; z-index: 1; }
 .party .btn-primary {
   background: var(--cielo); color: var(--ink);
   box-shadow: 0 14px 34px rgba(0, 0, 0, .25);
-  animation: latido 2.8s ease-in-out infinite;
 }
-.party .btn-primary:hover { animation-play-state: paused; }
 
 @keyframes fiesta-degradado {
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
-}
-@keyframes sticker-late {
-  0%, 100% { transform: rotate(7deg) scale(1); }
-  50% { transform: rotate(4deg) scale(1.05); }
-}
-@keyframes latido {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.035); }
 }
 
 /* ---------- Pie ---------- */
@@ -1186,6 +1175,41 @@ main > section { position: relative; z-index: 1; }
 }
 .fab:hover { transform: scale(1.07); }
 .fab svg { width: 29px; height: 29px; fill: currentColor; }
+
+/* ---------- Aparición al scroll ---------- */
+/* CONTRATO DE SEGURIDAD: el ocultamiento vive SOLO bajo .js-reveal, clase que
+   el guard del <head> añade únicamente si hay IntersectionObserver y el
+   visitante no pidió menos movimiento. Si reveal.js no marca
+   data-reveal-ready en 2.5 s, el propio guard retira la clase. Sin ella todo
+   se ve normal: nunca se queda contenido invisible esperando un observador. */
+.js-reveal .animate-on-scroll {
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .45s var(--ease), transform .45s var(--ease);
+}
+.js-reveal .animate-on-scroll.is-revealed { opacity: 1; transform: none; }
+.js-reveal .animate-on-scroll.reveal-d1 { transition-delay: .07s; }
+.js-reveal .animate-on-scroll.reveal-d2 { transition-delay: .14s; }
+.js-reveal .animate-on-scroll.reveal-d3 { transition-delay: .21s; }
+
+/* Los números 1-2-3 rebotan cuando su bloque entra. Aquí el movimiento sí
+   significa algo: está contando. */
+.js-reveal .panel.is-revealed .step { animation: paso-entra .5s var(--ease-rebote) both; }
+.js-reveal .panel.is-revealed .card:nth-child(2) .step { animation-delay: .12s; }
+.js-reveal .panel.is-revealed .card:nth-child(3) .step { animation-delay: .24s; }
+
+/* El sticker se sacude al aparecer, no en bucle para siempre. */
+.js-reveal .party.is-revealed .sticker { animation: sticker-sacude .55s ease-in-out .25s 2 both; }
+
+@keyframes paso-entra {
+  from { opacity: 0; transform: scale(.4) rotate(-18deg); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes sticker-sacude {
+  0%, 100% { transform: rotate(7deg) scale(1); }
+  30%      { transform: rotate(2deg) scale(1.07); }
+  60%      { transform: rotate(10deg) scale(1.03); }
+}
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
