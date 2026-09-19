@@ -40,6 +40,9 @@
   --body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --fab: 58px;
+  /* La hoja de cookies tiene que ganarle al flotante de WhatsApp: si no, el
+     botón verde se le monta encima al aviso. */
+  --z-cookie: 70;
 
   /* Momento en que arranca el logotipo. El confeti ocupa los primeros
      0.55s; de aquí en adelante todo el logotipo se mide contra --t0,
@@ -1180,6 +1183,47 @@ main > section { position: relative; z-index: 1; }
   0%, 100% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
 }
+
+/* ---------- Consentimiento de cookies ---------- */
+/* Hoja al pie, no modal, y sin velo: consentir es voluntario, no un peaje.
+   El contenedor no recibe eventos y solo la tarjeta los acepta, así que se
+   puede leer y navegar el sitio con el aviso en pantalla. */
+.cookie-hoja {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: var(--z-cookie);
+  display: flex;
+  justify-content: center;
+  padding: var(--s3);
+  padding-bottom: calc(var(--s3) + env(safe-area-inset-bottom, 0px));
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--dur) var(--ease), visibility var(--dur) var(--ease);
+}
+.cookie-hoja.visible { opacity: 1; visibility: visible; }
+
+.cookie-card {
+  pointer-events: auto;
+  width: 100%;
+  max-width: 520px;
+  background: rgba(255, 255, 255, .96);
+  backdrop-filter: blur(16px);
+  border: 1px solid #fff;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 -10px 40px rgba(43, 43, 54, .18);
+  padding: var(--s4);
+  /* Entra deslizándose desde abajo, como corresponde a una hoja. */
+  transform: translateY(18px);
+  transition: transform var(--dur) var(--ease);
+}
+.cookie-hoja.visible .cookie-card { transform: translateY(0); }
+
+.cookie-card h2 { font-size: 1.25rem; margin-bottom: var(--s2); }
+.cookie-card p { font-size: .94rem; color: var(--muted); margin-bottom: var(--s3); }
+.cookie-acciones { display: flex; gap: var(--s2); }
+.cookie-acciones .btn { flex: 1; font-size: .98rem; padding: .7rem 1.2rem; }
+.cookie-enlaces { margin: var(--s3) 0 0; font-size: .84rem; text-align: center; }
 
 /* ---------- Páginas de texto legal ---------- */
 /* Sin confeti: aquí la gente viene a leer, no a mirar. El fondo degradado se

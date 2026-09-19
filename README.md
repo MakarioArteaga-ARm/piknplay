@@ -107,6 +107,32 @@ La URL del `og:image` es absoluta y apunta al host donde el sitio se sirve: el
 rastreador de WhatsApp la abre desde su propio servidor, y una ruta relativa
 no le serviría.
 
+## Medición y cookies
+
+El sitio **no pone una sola cookie** y no carga analítica. Por eso el banner de
+consentimiento **no aparece**: un aviso que pide permiso para nada no es
+cumplimiento, es decoración, y entrena a la gente a aceptar sin leer.
+
+La maquinaria ya está montada. Para encender la medición:
+
+1. Pegar el ID de Google Analytics 4 en `ga4Id`, en `script/config.js`.
+2. Abrir la CSP en `_headers`, porque si no el navegador bloquea el script:
+   - `script-src`: agregar `https://www.googletagmanager.com`
+   - `connect-src`: agregar `https://www.google-analytics.com https://region1.google-analytics.com`
+
+Con eso aparece el banner, el enlace «Preferencias de cookies» del pie se
+muestra, y GA4 se carga **solo** después del sí explícito. «No, gracias» lo
+bloquea de verdad: además de no cargarlo, se activa el interruptor oficial
+`ga-disable-<ID>`, que lo deja mudo si el visitante revoca después de haber
+aceptado en la misma visita.
+
+Para revisar cómo se ve el aviso sin encender nada: `?cookies=demo`.
+
+El consentimiento se guarda en el `localStorage` del visitante con la versión
+del aviso. Sirve para respetar su decisión en visitas siguientes, **no como
+prueba frente a terceros**: acreditarlo exigiría guardarlo también del lado
+del servidor.
+
 ## Pendientes
 
 - Tarifas, horarios y fotos del local — los tiene que dar el cliente.
