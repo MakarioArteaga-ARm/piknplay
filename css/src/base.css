@@ -190,7 +190,11 @@ section { padding-block: clamp(40px, 6vw, 72px); }
   font-weight: 700;
   font-size: clamp(2.9rem, 9.6vw, 6.1rem);
   line-height: 1;
-  letter-spacing: -.012em;
+  /* La separación va en `gap` y no en `letter-spacing`: cada letra es un
+     elemento flex, y letter-spacing solo separa caracteres dentro de una
+     misma caja de texto — entre cajas flex no hace nada. Por eso las letras
+     salían pegadas por más que se ajustara el valor. */
+  gap: .045em;
   animation: logo-flota 6s calc(var(--t0) + 2.85s) ease-in-out infinite;
 }
 
