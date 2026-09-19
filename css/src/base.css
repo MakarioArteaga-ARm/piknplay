@@ -127,6 +127,11 @@ section { padding-block: clamp(40px, 6vw, 72px); }
   background: rgba(255, 253, 248, .72);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(255, 255, 255, .8);
+  /* Misma franja de acento que cierra el pie, aquí abriendo la página.
+     El borde va transparente y el degradado lo pinta border-image; como solo
+     el lado de arriba tiene grosor, solo ahí se ve. */
+  border-top: 4px solid transparent;
+  border-image: linear-gradient(90deg, var(--ambar), var(--menta), var(--naranja), var(--rosa), var(--uva), var(--cielo)) 1;
 }
 .site-header .container {
   min-height: 68px;
