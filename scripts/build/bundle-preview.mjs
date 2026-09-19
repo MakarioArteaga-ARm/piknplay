@@ -30,10 +30,15 @@ const [base, movil, escritorio] = await Promise.all([
   leer('css/src/desktop.css'),
 ]);
 
+// En el sitio el CSS vive en /css/, así que las imágenes se piden como
+// ../images/. En el preview el CSS va embebido en el HTML de la raíz, donde
+// ese ../ se sale del sitio: hay que bajarlo un nivel.
+const rebase = (css) => css.replaceAll('url(../images/', 'url(images/');
+
 const estilos = [
-  base,
-  `@media (max-width: 900px) {\n${movil}\n}`,
-  `@media (min-width: 901px) {\n${escritorio}\n}`,
+  rebase(base),
+  `@media (max-width: 900px) {\n${rebase(movil)}\n}`,
+  `@media (min-width: 901px) {\n${rebase(escritorio)}\n}`,
 ].join('\n\n');
 
 // Los scripts también viajan embebidos: el guard en línea del <head> y el

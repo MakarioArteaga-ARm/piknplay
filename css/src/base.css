@@ -37,9 +37,6 @@
   --focus: 0 0 0 3px #fff, 0 0 0 6px var(--cielo);
 
   --display: "Baloo 2", ui-rounded, "SF Pro Rounded", system-ui, sans-serif;
-  /* Solo para el logotipo: la 'a' de un solo piso y los remates redondos
-     del original. Baloo 2 hace la 'a' de dos pisos y no se parecía. */
-  --wordmark: "Fredoka", "Baloo 2", ui-rounded, system-ui, sans-serif;
   --body: "Nunito", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --fab: 58px;
@@ -182,107 +179,142 @@ section { padding-block: clamp(40px, 6vw, 72px); }
 }
 .hero-logo-wrap:hover { transform: rotate(-1.6deg) scale(1.02); }
 
+/* El logotipo es el ORIGINAL recortado en piezas, no una recreación con una
+   tipografía parecida: ninguna fuente disponible reproduce su 'a' ni su 'y'.
+   Las piezas se generan con scripts/img/recortar-logo.py separando manchas de
+   tinta conectadas, y se colocan en porcentajes sobre un lienzo con la
+   proporción del archivo. Así el conjunto escala sin deformarse y conserva el
+   bamboleo dibujado a mano, sin necesidad de inclinar nada por CSS. */
 .wordmark {
-  display: flex;
-  justify-content: center;
-  align-items: baseline;
-  font-family: var(--wordmark);
-  font-weight: 700;
-  font-size: clamp(2.9rem, 9.6vw, 6.1rem);
-  line-height: 1;
-  /* La separación va en `gap` y no en `letter-spacing`: cada letra es un
-     elemento flex, y letter-spacing solo separa caracteres dentro de una
-     misma caja de texto — entre cajas flex no hace nada. Por eso las letras
-     salían pegadas por más que se ajustara el valor. */
-  gap: .045em;
+  position: relative;
+  width: clamp(280px, 64vw, 640px);
+  aspect-ratio: 975 / 341;
   animation: logo-flota 6s calc(var(--t0) + 2.85s) ease-in-out infinite;
 }
+.pz {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
 
-/* La caja exterior lleva las animaciones; la interior, la pose fija de cada
-   letra. Separadas porque las dos usan transform y se pisarían. */
-.l {
-  display: inline-block;
-  position: relative;
+/* --- Qué hace cada pieza al entrar ---
+   La geometría (left/top/width/height y el archivo) la escribe el generador
+   más abajo; aquí solo va la coreografía. */
+.pz-letra {
   transform-origin: 50% 88%;
   animation:
     var(--anim) var(--dur-e, .6s) var(--ease-rebote) var(--d, 0s) both,
     meneo 6s calc(var(--t0) + 2.85s + var(--stagger, 0s)) ease-in-out infinite;
 }
-.l > .g {
-  display: inline-block;
-  transform: translateY(var(--ty, 0)) rotate(var(--tilt, 0deg));
+/* El punto de la i con su palito, y la n con sus rayos, forman grupo: se
+   mecen solo desplazándose y al mismo tiempo, porque si cada pieza girara
+   sobre su propio centro se despegarían del conjunto. */
+.pz-grupo {
+  animation:
+    var(--anim) var(--dur-e, .6s) var(--ease-rebote) var(--d, 0s) both,
+    meneo-suave 6s calc(var(--t0) + 2.85s) ease-in-out infinite;
 }
 
-/* Color, tamaño, inclinación y altura — leídos del logotipo original. */
-.l-p1 { --anim: desde-atras; --d: var(--t0);    --stagger: 0s;   color: var(--ambar);  font-size: 1.2em;  }
-.l-i  { --anim: cae;         --d: calc(var(--t0) + .4s);  --stagger: .04s; color: var(--menta);  font-size: .96em;  }
-.l-k  { --anim: converge;    --d: calc(var(--t0) + 1.7s); --stagger: .08s; color: var(--naranja); font-size: 1.02em; --dx: -190px; --dy: 130px; }
-.l-n  { --anim: desde-atras; --d: calc(var(--t0) + .9s); --stagger: .12s; color: var(--rosa);   font-size: .98em;  }
-.l-p2 { --anim: converge;    --d: calc(var(--t0) + 1.8s); --stagger: .16s; color: var(--cielo);  font-size: 1.16em; --dx: 165px;  --dy: -155px; }
-.l-l  { --anim: converge;    --d: calc(var(--t0) + 1.9s); --stagger: .20s; color: var(--menta);  font-size: 1.04em; --dx: 205px;  --dy: 125px; }
-.l-a  { --anim: converge;    --d: calc(var(--t0) + 2s); --stagger: .24s; color: var(--ambar);  font-size: .95em;  --dx: -160px; --dy: -140px; }
-.l-y  { --anim: converge;    --d: calc(var(--t0) + 2.1s); --stagger: .28s; color: var(--cielo);  font-size: 1.06em; --dx: 245px;  --dy: 45px; }
+.pz-p1 { --anim: desde-atras; --d: var(--t0);              --stagger: 0s; }
+.pz-k  { --anim: converge;    --d: calc(var(--t0) + 1.7s); --stagger: .08s; --dx: -190px; --dy: 130px; }
+.pz-p2 { --anim: converge;    --d: calc(var(--t0) + 1.8s); --stagger: .16s; --dx: 165px;  --dy: -155px; }
+.pz-l  { --anim: converge;    --d: calc(var(--t0) + 1.9s); --stagger: .20s; --dx: 205px;  --dy: 125px; }
+.pz-a  { --anim: converge;    --d: calc(var(--t0) + 2s);   --stagger: .24s; --dx: -160px; --dy: -140px; }
+.pz-y  { --anim: converge;    --d: calc(var(--t0) + 2.1s); --stagger: .28s; --dx: 245px;  --dy: 45px; }
 
-/* El bamboleo: ninguna letra está derecha ni a la misma altura. */
-.l-p1 > .g { --tilt: -5deg;  --ty: .08em; }
-.l-i  > .g { --tilt: 3deg;   --ty: -.03em; }
-.l-k  > .g { --tilt: -2.5deg; --ty: .01em; }
-.l-n  > .g { --tilt: 4deg;   --ty: .02em; }
-.l-p2 > .g { --tilt: -3.5deg; --ty: .06em; }
-.l-l  > .g { --tilt: 2.5deg;  --ty: -.02em; }
-.l-a  > .g { --tilt: -4deg;  --ty: .03em; }
-.l-y  > .g { --tilt: 3.5deg;  --ty: -.01em; }
+.pz-i       { --anim: cae;         --d: calc(var(--t0) + .4s); }
+.pz-i-punto { --anim: cae-punto;   --d: calc(var(--t0) + .7s); }
+.pz-n       { --anim: desde-atras; --d: calc(var(--t0) + .9s); }
 
-/* El punto de la i va aparte para que caiga después que el palito. Por eso la
-   letra es una i sin punto (U+0131) y el punto es este pseudo-elemento. */
-.l-i::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: .78em;
-  width: .3em;
-  height: .3em;
-  margin-left: -.15em;
-  border-radius: 50%;
-  background: currentColor;
-  animation: cae-punto .4s var(--ease-rebote) calc(var(--t0) + .7s) both;
+/* Los rayos ya traen su inclinación dibujada: aquí solo brotan desde su base. */
+.pz-rayo1, .pz-rayo2, .pz-rayo3 { --anim: rayo-sale; --dur-e: .35s; transform-origin: 50% 100%; }
+.pz-rayo1 { --d: calc(var(--t0) + 1.3s); }
+.pz-rayo2 { --d: calc(var(--t0) + 1.38s); }
+.pz-rayo3 { --d: calc(var(--t0) + 1.46s); }
+
+/* PLAYGROUND entra completo, todas sus piezas con el mismo tiempo. */
+.pz-sub { animation: sube .5s var(--ease) calc(var(--t0) + 2.6s) both; }
+
+/* --- Los movimientos --- */
+
+@keyframes desde-atras {
+  from { opacity: 0; transform: scale(.16); }
+  70%  { opacity: 1; transform: scale(1.14); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes cae {
+  from { opacity: 0; transform: translateY(-160%); }
+  70%  { opacity: 1; transform: translateY(8%); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes cae-punto {
+  from { opacity: 0; transform: translateY(-180%) scale(.5); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes rayo-sale {
+  from { opacity: 0; transform: scale(0); }
+  70%  { opacity: 1; transform: scale(1.3); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes converge {
+  from { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(.55) rotate(-12deg); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes sube {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: none; }
+}
+/* Sacudida corta al principio del ciclo y quieta el resto: con 6s de ciclo,
+   se menean ~1s y descansan 5s. */
+@keyframes meneo {
+  0%  { transform: rotate(0deg) translateY(0); }
+  3%  { transform: rotate(6deg) translateY(-4px); }
+  7%  { transform: rotate(-5deg) translateY(0); }
+  11% { transform: rotate(4deg) translateY(-2px); }
+  15% { transform: rotate(-2deg) translateY(0); }
+  19% { transform: rotate(0deg) translateY(0); }
+  100% { transform: rotate(0deg) translateY(0); }
+}
+@keyframes meneo-suave {
+  0%  { transform: translateY(0); }
+  4%  { transform: translateY(-5px); }
+  9%  { transform: translateY(0); }
+  14% { transform: translateY(-2px); }
+  19% { transform: translateY(0); }
+  100% { transform: translateY(0); }
+}
+@keyframes logo-flota {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
 }
 
-/* Los tres rayos que salen de la n. */
-.rayo {
-  position: absolute;
-  bottom: .88em;
-  width: .1em;
-  height: .32em;
-  border-radius: var(--pill);
-  transform-origin: 50% 100%;
-  animation: rayo-sale .35s var(--ease-rebote) var(--d, 1.5s) both;
-}
-.r1 { --rot: -34deg; --d: calc(var(--t0) + 1.3s); left: -6%;  background: var(--menta); }
-.r2 { --rot: -2deg;  --d: calc(var(--t0) + 1.38s); left: 42%;  background: var(--cielo); }
-.r3 { --rot: 32deg;  --d: calc(var(--t0) + 1.46s); right: -8%; background: var(--ambar); }
-
-.wordmark-sub {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .95em;
-  margin-top: .08em;
-  font-family: var(--body);
-  font-weight: 700;
-  font-size: clamp(.66rem, 2vw, .98rem);
-  letter-spacing: .38em;
-  text-indent: .38em;
-  color: #33333a;
-  animation: sube .5s var(--ease) calc(var(--t0) + 2.6s) both;
-}
-.wordmark-sub .punto {
-  width: .78em;
-  height: .78em;
-  border-radius: 50%;
-  background: var(--rosa);
-  flex: 0 0 auto;
-}
+/* INICIO PIEZAS DEL LOGOTIPO — generado por
+   scripts/img/recortar-logo.py. No editar a mano. */
+.pz-p1 { left: 1.641%; top: 21.114%; width: 19.179%; height: 69.501%; background-image: url(../images/logo/p1.png); }
+.pz-i-punto { left: 22.359%; top: 22.874%; width: 5.026%; height: 14.663%; background-image: url(../images/logo/i-punto.png); }
+.pz-i { left: 22.872%; top: 40.762%; width: 4.410%; height: 34.604%; background-image: url(../images/logo/i.png); }
+.pz-k { left: 30.051%; top: 26.100%; width: 11.077%; height: 51.613%; background-image: url(../images/logo/k.png); }
+.pz-rayo1 { left: 42.051%; top: 11.730%; width: 3.590%; height: 17.009%; background-image: url(../images/logo/rayo1.png); }
+.pz-n { left: 42.974%; top: 28.739%; width: 12.000%; height: 46.334%; background-image: url(../images/logo/n.png); }
+.pz-rayo2 { left: 48.205%; top: 4.985%; width: 2.564%; height: 17.009%; background-image: url(../images/logo/rayo2.png); }
+.pz-rayo3 { left: 52.308%; top: 9.971%; width: 4.410%; height: 14.956%; background-image: url(../images/logo/rayo3.png); }
+.pz-p2 { left: 56.718%; top: 24.047%; width: 12.718%; height: 53.079%; background-image: url(../images/logo/p2.png); }
+.pz-l { left: 69.333%; top: 20.235%; width: 7.282%; height: 55.132%; background-image: url(../images/logo/l.png); }
+.pz-a { left: 75.692%; top: 36.950%; width: 10.872%; height: 39.003%; background-image: url(../images/logo/a.png); }
+.pz-y { left: 81.846%; top: 44.868%; width: 16.513%; height: 50.147%; background-image: url(../images/logo/y.png); }
+.pz-sub-punto-izq { left: 21.333%; top: 85.337%; width: 3.282%; height: 9.677%; background-image: url(../images/logo/sub-punto-izq.png); }
+.pz-sub-p { left: 27.487%; top: 85.337%; width: 2.974%; height: 9.971%; background-image: url(../images/logo/sub-p.png); }
+.pz-sub-l { left: 32.308%; top: 85.337%; width: 2.564%; height: 9.971%; background-image: url(../images/logo/sub-l.png); }
+.pz-sub-a { left: 36.513%; top: 85.337%; width: 3.590%; height: 9.971%; background-image: url(../images/logo/sub-a.png); }
+.pz-sub-y { left: 41.231%; top: 85.337%; width: 3.179%; height: 9.971%; background-image: url(../images/logo/sub-y.png); }
+.pz-sub-g { left: 46.051%; top: 85.337%; width: 3.179%; height: 10.264%; background-image: url(../images/logo/sub-g.png); }
+.pz-sub-r { left: 51.282%; top: 85.337%; width: 2.872%; height: 9.971%; background-image: url(../images/logo/sub-r.png); }
+.pz-sub-o { left: 55.897%; top: 84.751%; width: 3.590%; height: 10.850%; background-image: url(../images/logo/sub-o.png); }
+.pz-sub-u { left: 61.128%; top: 85.337%; width: 3.282%; height: 10.264%; background-image: url(../images/logo/sub-u.png); }
+.pz-sub-n { left: 66.154%; top: 85.337%; width: 3.179%; height: 9.971%; background-image: url(../images/logo/sub-n.png); }
+.pz-sub-d { left: 71.179%; top: 85.337%; width: 3.179%; height: 9.971%; background-image: url(../images/logo/sub-d.png); }
+.pz-sub-punto-der { left: 76.410%; top: 85.337%; width: 3.385%; height: 9.677%; background-image: url(../images/logo/sub-punto-der.png); }
+/* FIN PIEZAS DEL LOGOTIPO */
 
 /* --- Confeti del fondo --- */
 /* Vive dentro de <main>, no del hero: así empieza justo debajo del

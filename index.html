@@ -37,7 +37,7 @@
        fonts.gstatic.com. Mientras el sitio no esté publicado, van por CDN. -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Fredoka:wght@500;600;700&family=Nunito:wght@400;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap">
 
   <!-- Hoja base + dos condicionales por media query, igual que armlaboral.com.
        El ?v= lo reescribe el build a partir del hash del contenido. -->
@@ -129,12 +129,35 @@
       <!-- El logotipo va como texto, no como imagen, para poder animar letra
            por letra. role="img" + aria-label: el lector de pantalla lee el
            nombre completo y no "P i k n P l a y". -->
+      <!-- Cada pieza es un recorte del logotipo original, colocado en
+           porcentajes sobre el lienzo. La geometría la escribe
+           scripts/img/recortar-logo.py dentro de css/src/base.css. -->
       <div class="hero-logo-wrap">
         <div class="wordmark" role="img" aria-label="PiknPlay Playground">
-          <span class="l l-p1"><span class="g">P</span></span><span class="l l-i"><span class="g">ı</span></span><span class="l l-k"><span class="g">k</span></span><span class="l l-n"><span class="g">n</span><i class="rayo r1"></i><i class="rayo r2"></i><i class="rayo r3"></i></span><span class="l l-p2"><span class="g">P</span></span><span class="l l-l"><span class="g">l</span></span><span class="l l-a"><span class="g">a</span></span><span class="l l-y"><span class="g">y</span></span>
-        </div>
-        <div class="wordmark-sub" aria-hidden="true">
-          <span class="punto"></span>PLAYGROUND<span class="punto"></span>
+          <span class="pz pz-letra pz-p1"></span>
+          <span class="pz pz-letra pz-k"></span>
+          <span class="pz pz-letra pz-p2"></span>
+          <span class="pz pz-letra pz-l"></span>
+          <span class="pz pz-letra pz-a"></span>
+          <span class="pz pz-letra pz-y"></span>
+          <span class="pz pz-grupo pz-i"></span>
+          <span class="pz pz-grupo pz-i-punto"></span>
+          <span class="pz pz-grupo pz-n"></span>
+          <span class="pz pz-grupo pz-rayo1"></span>
+          <span class="pz pz-grupo pz-rayo2"></span>
+          <span class="pz pz-grupo pz-rayo3"></span>
+          <span class="pz pz-sub pz-sub-punto-izq"></span>
+          <span class="pz pz-sub pz-sub-p"></span>
+          <span class="pz pz-sub pz-sub-l"></span>
+          <span class="pz pz-sub pz-sub-a"></span>
+          <span class="pz pz-sub pz-sub-y"></span>
+          <span class="pz pz-sub pz-sub-g"></span>
+          <span class="pz pz-sub pz-sub-r"></span>
+          <span class="pz pz-sub pz-sub-o"></span>
+          <span class="pz pz-sub pz-sub-u"></span>
+          <span class="pz pz-sub pz-sub-n"></span>
+          <span class="pz pz-sub pz-sub-d"></span>
+          <span class="pz pz-sub pz-sub-punto-der"></span>
         </div>
       </div>
       <span class="eyebrow"><span class="dot"></span> Plaza 3 Arcos · Tampico, Tamaulipas</span>
