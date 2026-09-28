@@ -1259,8 +1259,13 @@ main > section { position: relative; z-index: 1; }
 .legal-cuerpo .destacado {
   background: rgba(232, 67, 127, .07);
   border-left: 4px solid var(--rosa);
+  --x: 0;
   border-radius: var(--radius);
   padding: var(--s3);
+}
+.legal-cuerpo .destacado.cielo {
+  background: rgba(90, 174, 228, .10);
+  border-left-color: var(--cielo);
 }
 .legal-cuerpo .cierre {
   margin-top: var(--s5); padding-top: var(--s4);
