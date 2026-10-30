@@ -4,3 +4,7 @@ node_modules/
 dist/
 *.log
 scripts/og/.fonts/
+
+# Estado local de wrangler (Cloudflare): trae el ID de la cuenta y el correo.
+# Es de cada máquina; no va al repo ni al sitio publicado.
+.wrangler/
